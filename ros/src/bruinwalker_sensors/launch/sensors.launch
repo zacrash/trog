@@ -1,0 +1,14 @@
+<launch>
+    <!-- Velodyne VLP-16 LiDAR -->
+    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
+
+    <!-- Venus GPS -->
+    <!-- TODO: Uncomment when GPS is connected -->
+    <!-- <node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver"
+          args="_port:=/dev/ttyUSB0 _baud:=38400"/> -->
+
+    
+  <!-- <node pkg="IMU_node_pkg" type="IMU_node_type" name="IMU" output="screen">
+  </node> -->
+
+</launch>

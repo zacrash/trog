@@ -1,0 +1,10 @@
+obstacle_range: 5.0
+raytrace_range: 5.0
+#robot_radius: ir_of_robot
+inflation_radius: 1.0
+footprint: [[-0.8763, -1.05], [-0.8763, 1.05], [0.8763, 1.05], [0.8763, -1.05]]
+plugins: []
+
+observation_sources: point_cloud_sensor
+
+point_cloud_sensor: {sensor_frame: center_laser_link, data_type: PointCloud, topic: /prius/center_laser/scan, marking: true, clearing: true}
