@@ -300,14 +300,8 @@ bruinwalker_sensors_DIR:PATH=/home/caev/Desktop/bruinwalker/ros/devel/share/brui
 //Value Computed by CMake
 bruinwalker_sensors_SOURCE_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/src/bruinwalker_sensors
 
-//Value Computed by CMake
-bruinwalker_tf_BINARY_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_tf
-
 //The directory containing a CMake configuration file for bruinwalker_tf.
-bruinwalker_tf_DIR:PATH=/home/caev/Desktop/bruinwalker/ros/devel/share/bruinwalker_tf/cmake
-
-//Value Computed by CMake
-bruinwalker_tf_SOURCE_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/src/bruinwalker_tf
+bruinwalker_tf_DIR:PATH=bruinwalker_tf_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/kinetic/share/catkin/cmake

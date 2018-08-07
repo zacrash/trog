@@ -51,15 +51,12 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>bruinwalker_odom</build_depend>
   <build_depend>bruinwalker_sensors</build_depend>
-  <build_depend>bruinwalker_tf</build_depend>
   <build_depend>move_base</build_depend>
   <build_export_depend>bruinwalker_odom</build_export_depend>
   <build_export_depend>bruinwalker_sensors</build_export_depend>
-  <build_export_depend>bruinwalker_tf</build_export_depend>
   <build_export_depend>move_base</build_export_depend>
   <exec_depend>bruinwalker_odom</exec_depend>
   <exec_depend>bruinwalker_sensors</exec_depend>
-  <exec_depend>bruinwalker_tf</exec_depend>
   <exec_depend>move_base</exec_depend>
 
 

@@ -10,7 +10,6 @@ project(bruinwalker_2dnav)
 find_package(catkin REQUIRED COMPONENTS
   bruinwalker_odom
   bruinwalker_sensors
-  bruinwalker_tf
   move_base
 )
 
