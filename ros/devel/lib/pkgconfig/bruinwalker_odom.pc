@@ -1,8 +1,0 @@
-prefix=/home/caev/Desktop/bruinwalker/ros/devel
-
-Name: bruinwalker_odom
-Description: Description of bruinwalker_odom
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/caev/Desktop/bruinwalker/ros/devel/lib 
-Requires: 

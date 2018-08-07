@@ -1,2 +1,0 @@
-bruinwalker_2dnav:bruinwalker_mapping:bruinwalker_odom:bruinwalker_sensors
--DCATKIN_DEVEL_PREFIX=/home/caev/Desktop/bruinwalker/ros/devel -DCMAKE_INSTALL_PREFIX=/home/caev/Desktop/bruinwalker/ros/install -G Unix Makefiles
