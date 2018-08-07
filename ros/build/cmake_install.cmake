@@ -117,8 +117,8 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/caev/Desktop/bruinwalker/ros/build/gtest/cmake_install.cmake")
+  include("/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_mapping/cmake_install.cmake")
   include("/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_odom/cmake_install.cmake")
-  include("/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_tf/cmake_install.cmake")
   include("/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_sensors/cmake_install.cmake")
   include("/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_2dnav/cmake_install.cmake")
 

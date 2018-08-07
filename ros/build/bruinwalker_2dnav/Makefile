@@ -56,6 +56,18 @@ CMAKE_BINARY_DIR = /home/caev/Desktop/bruinwalker/ros/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -66,28 +78,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
 
 # Special rule for the target list_install_components
 list_install_components:
@@ -110,17 +100,16 @@ install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
 
 # Special rule for the target test
 test:
@@ -132,6 +121,17 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,36 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_py: bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-.PHONY : nav_msgs_generate_messages_py
-
-# fast build rule for target.
-nav_msgs_generate_messages_py/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-.PHONY : nav_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_lisp: bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : nav_msgs_generate_messages_lisp
-
-# fast build rule for target.
-nav_msgs_generate_messages_lisp/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
-.PHONY : nav_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule:
 	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
 .PHONY : bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
@@ -209,66 +179,6 @@ move_base_msgs_generate_messages_cpp: bruinwalker_2dnav/CMakeFiles/move_base_msg
 move_base_msgs_generate_messages_cpp/fast:
 	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build
 .PHONY : move_base_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_lisp: bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_lisp
-
-# fast build rule for target.
-move_base_msgs_generate_messages_lisp/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build
-.PHONY : move_base_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_nodejs: bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : nav_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-nav_msgs_generate_messages_nodejs/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
-.PHONY : nav_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule
-
-# Convenience name for target.
-move_base_gencfg: bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule
-
-.PHONY : move_base_gencfg
-
-# fast build rule for target.
-move_base_gencfg/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/build
-.PHONY : move_base_gencfg/fast
-
-# Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_py: bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_py
-
-# fast build rule for target.
-move_base_msgs_generate_messages_py/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/build
-.PHONY : move_base_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule:
@@ -286,19 +196,34 @@ move_base_msgs_generate_messages_eus/fast:
 .PHONY : move_base_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
+bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule:
+	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
+.PHONY : bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-nav_msgs_generate_messages_cpp: bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
+move_base_msgs_generate_messages_lisp: bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
 
-.PHONY : nav_msgs_generate_messages_cpp
+.PHONY : move_base_msgs_generate_messages_lisp
 
 # fast build rule for target.
-nav_msgs_generate_messages_cpp/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
-.PHONY : nav_msgs_generate_messages_cpp/fast
+move_base_msgs_generate_messages_lisp/fast:
+	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build
+.PHONY : move_base_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule:
+	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule
+.PHONY : bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule
+
+# Convenience name for target.
+move_base_gencfg: bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/rule
+
+.PHONY : move_base_gencfg
+
+# fast build rule for target.
+move_base_gencfg/fast:
+	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_gencfg.dir/build
+.PHONY : move_base_gencfg/fast
 
 # Convenience name for target.
 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule:
@@ -316,19 +241,19 @@ move_base_msgs_generate_messages_nodejs/fast:
 .PHONY : move_base_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
-.PHONY : bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule:
+	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f CMakeFiles/Makefile2 bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
+.PHONY : bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-nav_msgs_generate_messages_eus: bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+move_base_msgs_generate_messages_py: bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
 
-.PHONY : nav_msgs_generate_messages_eus
+.PHONY : move_base_msgs_generate_messages_py
 
 # fast build rule for target.
-nav_msgs_generate_messages_eus/fast:
-	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make bruinwalker_2dnav/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-.PHONY : nav_msgs_generate_messages_eus/fast
+move_base_msgs_generate_messages_py/fast:
+	cd /home/caev/Desktop/bruinwalker/ros/build && $(MAKE) -f bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/build.make bruinwalker_2dnav/CMakeFiles/move_base_msgs_generate_messages_py.dir/build
+.PHONY : move_base_msgs_generate_messages_py/fast
 
 # Help Target
 help:
@@ -336,24 +261,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... install/local"
 	@echo "... list_install_components"
 	@echo "... install/strip"
-	@echo "... install"
-	@echo "... nav_msgs_generate_messages_py"
-	@echo "... nav_msgs_generate_messages_lisp"
+	@echo "... install/local"
 	@echo "... move_base_msgs_generate_messages_cpp"
-	@echo "... move_base_msgs_generate_messages_lisp"
-	@echo "... nav_msgs_generate_messages_nodejs"
-	@echo "... move_base_gencfg"
-	@echo "... move_base_msgs_generate_messages_py"
-	@echo "... test"
 	@echo "... move_base_msgs_generate_messages_eus"
-	@echo "... nav_msgs_generate_messages_cpp"
+	@echo "... test"
+	@echo "... move_base_msgs_generate_messages_lisp"
+	@echo "... move_base_gencfg"
 	@echo "... move_base_msgs_generate_messages_nodejs"
-	@echo "... nav_msgs_generate_messages_eus"
+	@echo "... move_base_msgs_generate_messages_py"
+	@echo "... edit_cache"
 .PHONY : help
 
 

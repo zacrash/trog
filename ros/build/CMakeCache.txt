@@ -277,6 +277,12 @@ bruinwalker_2dnav_BINARY_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/build/bru
 bruinwalker_2dnav_SOURCE_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/src/bruinwalker_2dnav
 
 //Value Computed by CMake
+bruinwalker_mapping_BINARY_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_mapping
+
+//Value Computed by CMake
+bruinwalker_mapping_SOURCE_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/src/bruinwalker_mapping
+
+//Value Computed by CMake
 bruinwalker_odom_BINARY_DIR:STATIC=/home/caev/Desktop/bruinwalker/ros/build/bruinwalker_odom
 
 //The directory containing a CMake configuration file for bruinwalker_odom.

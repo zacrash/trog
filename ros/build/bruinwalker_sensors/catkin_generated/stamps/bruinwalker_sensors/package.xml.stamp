@@ -67,8 +67,6 @@
   <exec_depend>velodyne_msgs</exec_depend>
   <exec_depend>velodyne_pointcloud</exec_depend> 
   <exec_depend>nmea_navsat_driver</exec_depend> 
-
-
   
     <!-- The export tag contains other, unspecified, tags -->
   <export>

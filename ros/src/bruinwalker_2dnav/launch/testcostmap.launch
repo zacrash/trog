@@ -1,0 +1,5 @@
+<launch>
+	<node name="costmap_node" pkg="costmap_2d" type="costmap_2d_node" >
+		<rosparam file="$(find bruinwalker_2dnav)/cfg/minimal.yaml" command="load" ns="/costmap_node/costmap" />
+	</node>
+</launch>
