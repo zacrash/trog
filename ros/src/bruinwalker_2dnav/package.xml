@@ -4,12 +4,8 @@
   <version>0.0.0</version>
   <description>The bruinwalker_2dnav package</description>
 
-  <maintainer email="caev@todo.todo">caev</maintainer>
+  <maintainer email="bsquicciarini@ucla.edu">Brad Squicciarini</maintainer>
 
-
-  <!-- One license tag required, multiple allowed, one license per tag -->
-  <!-- Commonly used license strings: -->
-  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
