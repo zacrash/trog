@@ -1,11 +1,30 @@
-// Need a better name lols
 
-/*
-  Arduino ROS node for JetsonCar project
-  The Arduino controls a TRAXXAS Rally Car
-  MIT License
-  JetsonHacks (2016)
-*/
+/*==========================================================================
+ Arduino ROS node for Bruinwalker project                                   
+ The Arduino controls a SDC2130 Roboteq Motor Controller with Encoder Input 
+ SMERC (2018)                                                               
+
+PIN LAYOUT
+   SDC2130 DB-15      -------------     Arduino 
+   -----------------                    -------
+            6*     -------------------   Arduino Rx (D0)
+            7*     -------------------   Arduino Tx (D1)
+
+   SDC2130 DB-15      -------------     Encoder Pull Up 
+   -----------------                    ---------------
+            4      -------------------   Right Motor Encoder A Channel
+            8      -------------------   Right Motor Encoder B Channel
+            14     -------------------   Right Motor Encoder 5V
+            13     -------------------   Right Motor Encoder Ground
+            10     -------------------   Left Motor Encoder A Channel
+            15     -------------------   Left Motor Encoder B Channel
+            14     -------------------   Left Motor Encoder 5V
+            13     -------------------   Right Motor Encoder Ground
+            
+   * NOTE: Pins 6 and 7 are for TTL level serial. Pins 2 and 3 are also
+           labeled as Tx and Rx in the motor controllers datasheet but 
+           these are RS-232 level.  
+=============================================================================*/           
 
 #if defined(ARDUINO) && ARDUINO >= 100
   #include "Arduino.h"
@@ -76,7 +95,7 @@ void driveCallback ( const geometry_msgs::Twist&  twistMsg )
 ros::Subscriber<geometry_msgs::Twist> twistSubscriber("TWIST CMD", &driveCallback) ;
 
 void setup(){
-  Serial.begin(115200) ; // Roboteq SDC2130 COM (Must be 115200)
+  Serial.begin(115200); // Roboteq SDC2130 COM (Must be 115200)
 
   // ROS Initialization
   nh.initNode();
@@ -93,7 +112,6 @@ void setup(){
 
   // Give the Roboteq some time to boot-up. 
   delay(1000) ;
-  
 }
 
 void loop(){
