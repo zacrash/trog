@@ -8,6 +8,7 @@ For troggie
     * Peter might have some...
 * Thermal Paste
 * Better Arduino
+* Soldering Iron in lab?
 
 ## Hardware TODOs
 * Set up IMU
