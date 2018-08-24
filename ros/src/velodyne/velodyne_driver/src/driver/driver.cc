@@ -18,7 +18,7 @@
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
 #include <velodyne_msgs/VelodyneScan.h>
-#include <velodyne_msgs/VelodyneGPS.h>
+#include <velodyne_msgs/VelodynePosition.h>
 
 #include "velodyne_driver/driver.h"
 
@@ -133,47 +133,51 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
                                                              &diag_max_freq_,
                                                              0.1, 10),
                                         TimeStampStatusParam()));
-  diag_timer_ = private_nh.createTimer(ros::Duration(0.2), &VelodyneDriver::diagTimerCallback,this);
+  diag_timer_ = private_nh.createTimer(ros::Duration(0.2), &VelodyneDriver::diagTimerCallback, this);
 
   // open Velodyne input device or file
   if (dump_file != "")                  // have PCAP file?
     {
       // read data from packet capture file
-      input_.reset(new velodyne_driver::InputPCAP(private_nh, udp_data_port,
+      data_input_.reset(new velodyne_driver::InputPCAP(private_nh, udp_data_port,
                                                   packet_rate, dump_file));
     }
   else
     {
       // read data from live socket
-      input_.reset(new velodyne_driver::InputSocket(private_nh, udp_data_port));
+      data_input_.reset(new velodyne_driver::InputSocket(private_nh, udp_data_port));
 
-      // read position from live socket
-      gps_input_.reset(new velodyne_driver::InputSocket(private_nh, udp_position_port));
+      // read position packet from live socket
+      position_input_.reset(new velodyne_driver::InputSocket(private_nh, 
+                                                        udp_position_port));
     }
 
   // raw data packet output topic
-  output_ =
+  data_output_ =
     node.advertise<velodyne_msgs::VelodyneScan>("velodyne_packets", 10);
 
-  // raw gps packet output topic
-  gps_output_ = node.advertise<velodyne_msgs::VelodyneGPS>("raw_gps", 10);
+  // raw position packet output topic
+  position_output_ = 
+    node.advertise<velodyne_msgs::VelodynePosition>("velodyne_position_packet", 10);
 }
 
-bool VelodyneDriver::gpsPoll(void)
+bool VelodyneDriver::positionPoll(void)
 {
   // Allocate a new shared pointer for zero-copy sharing with other nodelets.
-  velodyne_msgs::VelodyneGPSPtr gps(new velodyne_msgs::VelodyneGPS);
+  velodyne_msgs::VelodynePositionPtr position(new velodyne_msgs::VelodynePosition);
 
   while(true)
   {
-    int rc = gps_input_->getGPSPacket(gps.get());
+    int rc = position_input_->getPositionPacket(position.get());
     if (rc == 0) break; //got a full packet?
     if (rc < 0) return false; // end of file reached?
   }
 
-  // publish message using time of last packet read
-  ROS_DEBUG("Publishing a raw gps packet.");
-  gps_output_.publish(gps);
+  // Publish position packet
+  ROS_DEBUG("Publishing a raw position packet.");
+  position_output_.publish(position);
+
+  //TODO: Do I need to notify diagnostics?
 
   return true;
 }
@@ -182,7 +186,7 @@ bool VelodyneDriver::gpsPoll(void)
  *
  *  @returns true unless end of file reached
  */
-bool VelodyneDriver::poll(void)
+bool VelodyneDriver::dataPoll(void)
 {
   // Allocate a new shared pointer for zero-copy sharing with other nodelets.
   velodyne_msgs::VelodyneScanPtr scan(new velodyne_msgs::VelodyneScan);

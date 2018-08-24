@@ -39,7 +39,7 @@
 
 #include <ros/ros.h>
 #include <velodyne_msgs/VelodynePacket.h>
-#include <velodyne_msgs/VelodyneGPS.h>
+#include <velodyne_msgs/VelodynePosition.h>
 
 
 namespace velodyne_driver
@@ -65,7 +65,7 @@ namespace velodyne_driver
     virtual int getPacket(velodyne_msgs::VelodynePacket *pkt,
                           const double time_offset) = 0;
     
-    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt) = 0;                          
+    virtual int getPositionPacket(velodyne_msgs::VelodynePosition *pkt) = 0;                          
 
   protected:
     ros::NodeHandle private_nh_;
@@ -83,7 +83,7 @@ namespace velodyne_driver
 
     virtual int getPacket(velodyne_msgs::VelodynePacket *pkt, 
                           const double time_offset);
-    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt);
+    virtual int getPositionPacket(velodyne_msgs::VelodynePosition *pkt);
     void setDeviceIP( const std::string& ip );
   private:
 
@@ -114,7 +114,7 @@ namespace velodyne_driver
                           const double time_offset);
     
     // TODO: Add this for pcap files
-    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt);
+    virtual int getPositionPacket(velodyne_msgs::VelodynePosition *pkt);
 
     void setDeviceIP( const std::string& ip );
 

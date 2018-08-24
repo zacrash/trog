@@ -35,8 +35,8 @@ public:
                  ros::NodeHandle private_nh);
   ~VelodyneDriver() {}
 
-  bool poll(void);
-  bool gpsPoll(void);
+  bool dataPoll(void);
+  bool positionPoll(void);
 
 private:
 
@@ -61,11 +61,11 @@ private:
     double time_offset;              ///< time in seconds added to each velodyne time stamp
   } config_;
 
-  boost::shared_ptr<Input> input_;
-  boost::shared_ptr<Input> gps_input_;
+  boost::shared_ptr<Input> data_input_;
+  boost::shared_ptr<Input> position_input_;
 
-  ros::Publisher output_;
-  ros::Publisher gps_output_;
+  ros::Publisher data_output_;
+  ros::Publisher position_output_;
 
 
   /** diagnostics updater */

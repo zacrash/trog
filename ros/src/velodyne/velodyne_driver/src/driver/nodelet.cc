@@ -38,7 +38,7 @@ public:
         NODELET_INFO("shutting down driver thread");
         running_ = false;
         deviceDataThread_->join();
-        deviceGpsThread_->join();
+        devicePositionThread_->join();
         NODELET_INFO("driver thread stopped");
       }
   }
@@ -47,12 +47,12 @@ private:
 
   virtual void onInit(void);
   virtual void deviceDataPoll(void);
-  virtual void deviceGpsPoll(void);
+  virtual void devicePositionPoll(void);
 
 
   volatile bool running_;               ///< device thread is running
   boost::shared_ptr<boost::thread> deviceDataThread_;
-  boost::shared_ptr<boost::thread> deviceGpsThread_;
+  boost::shared_ptr<boost::thread> devicePositionThread_;
 
   boost::shared_ptr<VelodyneDriver> dvr_; ///< driver implementation class
 };
@@ -67,9 +67,9 @@ void DriverNodelet::onInit()
   deviceDataThread_ = boost::shared_ptr< boost::thread >
     (new boost::thread(boost::bind(&DriverNodelet::deviceDataPoll, this)));
 
-  // spawn device gps poll thread
-  deviceGpsThread_ = boost::shared_ptr< boost::thread >
-    (new boost::thread(boost::bind(&DriverNodelet::deviceGpsPoll, this)));
+  // spawn device position poll thread
+  devicePositionThread_ = boost::shared_ptr< boost::thread >
+    (new boost::thread(boost::bind(&DriverNodelet::devicePositionPoll, this)));
 }
 
 /** @brief Device poll thread data loop. */
@@ -78,20 +78,20 @@ void DriverNodelet::deviceDataPoll()
   while(ros::ok())
     {
       // poll device until end of file
-      running_ = dvr_->poll();
+      running_ = dvr_->dataPoll();
       if (!running_)
         break;
     }
   running_ = false;
 }
 
-/** @brief Device poll thread gps loop. */
-void DriverNodelet::deviceGpsPoll()
+/** @brief Device poll thread position loop. */
+void DriverNodelet::devicePositionPoll()
 {
   while(ros::ok())
     {
       // poll device until end of file
-      running_ = dvr_->gpsPoll();
+      running_ = dvr_->positionPoll();
       if (!running_)
         break;
     }

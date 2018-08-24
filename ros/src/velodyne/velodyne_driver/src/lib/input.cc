@@ -38,8 +38,8 @@ namespace velodyne_driver
   static const size_t packet_size =
     sizeof(velodyne_msgs::VelodynePacket().data);
 
-  static const size_t gps_packet_size =
-    sizeof(velodyne_msgs::VelodyneGPS().data);
+  static const size_t position_packet_size =
+    sizeof(velodyne_msgs::VelodynePosition().data);
 
 
   ////////////////////////////////////////////////////////////////////////
@@ -114,86 +114,6 @@ namespace velodyne_driver
   {
     (void) close(sockfd_);
   }
-
-  /** @brief reads in a position packet from Velodyne  */
-  int InputSocket::getGPSPacket(velodyne_msgs::VelodyneGPS *pkt)
-  {
-      double time1 = ros::Time::now().toSec();
-
-      struct pollfd fds[1];
-      fds[0].fd = sockfd_;
-      fds[0].events = POLLIN;
-      static const int POLL_TIMEOUT = 1000; // one second (in msec)
-
-      sockaddr_in sender_address;
-      socklen_t sender_address_len = sizeof(sender_address);
-
-      while (true)
-        {
-          // poll() until input available
-          do
-            {
-              int retval = poll(fds, 1, POLL_TIMEOUT);
-              if (retval < 0)             // poll() error?
-                {
-                  if (errno != EINTR)
-                    ROS_ERROR("poll() error: %s", strerror(errno));
-                  return 1;
-                }
-              if (retval == 0)            // poll() timeout?
-                {
-                  ROS_WARN("Velodyne poll() timeout");
-                  return 1;
-                }
-              if ((fds[0].revents & POLLERR)
-                  || (fds[0].revents & POLLHUP)
-                  || (fds[0].revents & POLLNVAL)) // device error?
-                {
-                  ROS_ERROR("poll() reports Velodyne error");
-                  return 1;
-                }
-            } while ((fds[0].revents & POLLIN) == 0);
-
-          // Receive packets that should now be available from the
-          // socket using a blocking read.
-          ssize_t nbytes = recvfrom(sockfd_, &pkt->data,
-                                    gps_packet_size,  0,
-                                    (sockaddr*) &sender_address,
-                                    &sender_address_len);
-
-          if (nbytes < 0)
-            {
-              if (errno != EWOULDBLOCK)
-                {
-                  perror("recvfail");
-                  ROS_INFO("recvfail");
-                  return 1;
-                }
-            }
-          else if ((size_t) nbytes == gps_packet_size)
-            {
-              // read successful,
-              // if packet is not from the lidar scanner we selected by IP,
-              // continue otherwise we are done
-              if(devip_str_ != ""
-                && sender_address.sin_addr.s_addr != devip_.s_addr)
-                continue;
-              else
-                break; //done
-            }
-
-          ROS_DEBUG_STREAM("incomplete Velodyne GPS packet read: "
-                          << nbytes << " bytes");
-        }
-
-      // Average the times at which we begin and end reading.  Use that to
-      // estimate when the scan occurred. Add the time offset.
-      double time2 = ros::Time::now().toSec();
-      pkt->stamp = ros::Time((time2 + time1) / 2.0);
-
-      return 0;
-    }
-
 
   /** @brief Get one velodyne packet. */
   int InputSocket::getPacket(velodyne_msgs::VelodynePacket *pkt, const double time_offset)
@@ -291,6 +211,86 @@ namespace velodyne_driver
     return 0;
   }
 
+    /** @brief reads in a position packet from Velodyne  */
+  int InputSocket::getPositionPacket(velodyne_msgs::VelodynePosition *pkt)
+  {
+      double time1 = ros::Time::now().toSec();
+
+      struct pollfd fds[1];
+      fds[0].fd = sockfd_;
+      fds[0].events = POLLIN;
+      static const int POLL_TIMEOUT = 1000; // one second (in msec)
+
+      sockaddr_in sender_address;
+      socklen_t sender_address_len = sizeof(sender_address);
+
+      while (true)
+        {
+          // poll() until input available
+          do
+            {
+              int retval = poll(fds, 1, POLL_TIMEOUT);
+              if (retval < 0)             // poll() error?
+                {
+                  if (errno != EINTR)
+                    ROS_ERROR("poll() error: %s", strerror(errno));
+                  return 1;
+                }
+              if (retval == 0)            // poll() timeout?
+                {
+                  ROS_WARN("Velodyne poll() timeout");
+                  return 1;
+                }
+              if ((fds[0].revents & POLLERR)
+                  || (fds[0].revents & POLLHUP)
+                  || (fds[0].revents & POLLNVAL)) // device error?
+                {
+                  ROS_ERROR("poll() reports Velodyne error");
+                  return 1;
+                }
+            } while ((fds[0].revents & POLLIN) == 0);
+
+          // Receive packets that should now be available from the
+          // socket using a blocking read.
+          ssize_t nbytes = recvfrom(sockfd_, &pkt->data,
+                                    position_packet_size,  0,
+                                    (sockaddr*) &sender_address,
+                                    &sender_address_len);
+
+          if (nbytes < 0)
+            {
+              if (errno != EWOULDBLOCK)
+                {
+                  perror("recvfail");
+                  ROS_INFO("recvfail");
+                  return 1;
+                }
+            }
+          else if ((size_t) nbytes == position_packet_size)
+            {
+              // read successful,
+              // if packet is not from the lidar scanner we selected by IP,
+              // continue otherwise we are done
+              if(devip_str_ != ""
+                && sender_address.sin_addr.s_addr != devip_.s_addr)
+                continue;
+              else
+                break; //done
+            }
+
+          ROS_DEBUG_STREAM("incomplete Velodyne Position packet read: "
+                          << nbytes << " bytes");
+        }
+
+      // Average the times at which we begin and end reading.  Use that to
+      // estimate when the scan occurred. Add the time offset.
+      double time2 = ros::Time::now().toSec();
+      pkt->stamp = ros::Time((time2 + time1) / 2.0);
+
+      return 0;
+    }
+
+
   ////////////////////////////////////////////////////////////////////////
   // InputPCAP class implementation
   ////////////////////////////////////////////////////////////////////////
@@ -350,7 +350,7 @@ namespace velodyne_driver
   }
 
   // TODO: Implement
-  int InputPCAP::getGPSPacket(velodyne_msgs::VelodyneGPS *pkt){}
+  int InputPCAP::getPositionPacket(velodyne_msgs::VelodynePosition *pkt){}
 
 
   /** @brief Get one velodyne packet. */
