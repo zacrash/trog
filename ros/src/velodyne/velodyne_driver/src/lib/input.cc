@@ -115,8 +115,8 @@ namespace velodyne_driver
     (void) close(sockfd_);
   }
 
-  // TODO:: What should time_offset be?
-  int InputSocket::getGPSPacket(velodyne_msgs::VelodyneGPS *pkt, const double time_offset)
+  /** @brief reads in a position packet from Velodyne  */
+  int InputSocket::getGPSPacket(velodyne_msgs::VelodyneGPS *pkt)
   {
       double time1 = ros::Time::now().toSec();
 
@@ -130,23 +130,6 @@ namespace velodyne_driver
 
       while (true)
         {
-          // Unfortunately, the Linux kernel recvfrom() implementation
-          // uses a non-interruptible sleep() when waiting for data,
-          // which would cause this method to hang if the device is not
-          // providing data.  We poll() the device first to make sure
-          // the recvfrom() will not block.
-          //
-          // Note, however, that there is a known Linux kernel bug:
-          //
-          //   Under Linux, select() may report a socket file descriptor
-          //   as "ready for reading", while nevertheless a subsequent
-          //   read blocks.  This could for example happen when data has
-          //   arrived but upon examination has wrong checksum and is
-          //   discarded.  There may be other circumstances in which a
-          //   file descriptor is spuriously reported as ready.  Thus it
-          //   may be safer to use O_NONBLOCK on sockets that should not
-          //   block.
-
           // poll() until input available
           do
             {
@@ -206,7 +189,7 @@ namespace velodyne_driver
       // Average the times at which we begin and end reading.  Use that to
       // estimate when the scan occurred. Add the time offset.
       double time2 = ros::Time::now().toSec();
-      pkt->stamp = ros::Time((time2 + time1) / 2.0 + time_offset);
+      pkt->stamp = ros::Time((time2 + time1) / 2.0);
 
       return 0;
     }
@@ -367,7 +350,7 @@ namespace velodyne_driver
   }
 
   // TODO: Implement
-  int InputPCAP::getGPSPacket(velodyne_msgs::VelodyneGPS *pkt, const double time_offset){}
+  int InputPCAP::getGPSPacket(velodyne_msgs::VelodyneGPS *pkt){}
 
 
   /** @brief Get one velodyne packet. */

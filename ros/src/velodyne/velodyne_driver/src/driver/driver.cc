@@ -151,38 +151,29 @@ VelodyneDriver::VelodyneDriver(ros::NodeHandle node,
       gps_input_.reset(new velodyne_driver::InputSocket(private_nh, udp_position_port));
     }
 
-  // raw packet output topic
+  // raw data packet output topic
   output_ =
     node.advertise<velodyne_msgs::VelodyneScan>("velodyne_packets", 10);
 
-  // raw packet output topic
-  gps_output_ =
-    node.advertise<velodyne_msgs::VelodyneGPS>("velodyne_gps", 10);
+  // raw gps packet output topic
+  gps_output_ = node.advertise<velodyne_msgs::VelodyneGPS>("raw_gps", 10);
 }
 
-// TODO: Fix
 bool VelodyneDriver::gpsPoll(void)
 {
   // Allocate a new shared pointer for zero-copy sharing with other nodelets.
-  velodyne_msgs::VelodyneGPS * gps = new velodyne_msgs::VelodyneGPS;
+  velodyne_msgs::VelodyneGPSPtr gps(new velodyne_msgs::VelodyneGPS);
 
   while(true)
   {
-    int rc = gps_input_->getGPSPacket(gps, config_.time_offset);
+    int rc = gps_input_->getGPSPacket(gps.get());
     if (rc == 0) break; //got a full packet?
     if (rc < 0) return false; // end of file reached?
   }
 
   // publish message using time of last packet read
-  ROS_DEBUG("Publishing a full Velodyne gps fix.");
-  velodyne_msgs::VelodyneGPSPtr shared_gps(gps);
-  gps_output_.publish(shared_gps);
-
-  // TODO: Is this necessary?
-  // // notify diagnostics that a message has been published, updating
-  // // its status
-  // diag_topic_->tick(scan->header.stamp);
-  // diagnostics_.update();
+  ROS_DEBUG("Publishing a raw gps packet.");
+  gps_output_.publish(gps);
 
   return true;
 }

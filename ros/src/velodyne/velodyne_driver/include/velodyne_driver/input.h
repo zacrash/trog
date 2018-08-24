@@ -65,8 +65,7 @@ namespace velodyne_driver
     virtual int getPacket(velodyne_msgs::VelodynePacket *pkt,
                           const double time_offset) = 0;
     
-    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt,
-                          const double time_offset) = 0;                          
+    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt) = 0;                          
 
   protected:
     ros::NodeHandle private_nh_;
@@ -84,8 +83,7 @@ namespace velodyne_driver
 
     virtual int getPacket(velodyne_msgs::VelodynePacket *pkt, 
                           const double time_offset);
-    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt, 
-                          const double time_offset);
+    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt);
     void setDeviceIP( const std::string& ip );
   private:
 
@@ -116,8 +114,7 @@ namespace velodyne_driver
                           const double time_offset);
     
     // TODO: Add this for pcap files
-    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt, 
-                          const double time_offset);
+    virtual int getGPSPacket(velodyne_msgs::VelodyneGPS *pkt);
 
     void setDeviceIP( const std::string& ip );
 
