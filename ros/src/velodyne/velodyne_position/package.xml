@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>veldoyne_position</name>
+  <version>0.0.0</version>
+  <description>The bruinwalker_sensors package</description>
+
+  <maintainer email="bsquicciarini@ucla.edu">Brad Squicciarini</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>velodyne_driver</depend>
+  <depend>roscpp</depend>
+  <depend>velodyne_msgs</depend>
+
+</package>
