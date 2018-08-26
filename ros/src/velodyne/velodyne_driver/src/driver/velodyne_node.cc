@@ -24,7 +24,7 @@ int main(int argc, char** argv)
   velodyne_driver::VelodyneDriver dvr(node, private_nh);
 
   // loop until shut down or end of file
-  while(ros::ok() && dvr.poll())
+  while(ros::ok() && dvr.dataPoll())
     {
       ros::spinOnce();
     }

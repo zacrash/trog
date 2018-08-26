@@ -1,15 +1,27 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(velodyne_position)
 
-find_package(catkin REQUIRED)
-
-catkin_package()
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-    include
-# ${catkin_INCLUDE_DIRS}
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  velodyne_driver
+  velodyne_msgs
 )
 
-add_executable(velodyne_to_nmea_node src/rawPositionData_node.cpp)
+catkin_package(
+  CATKIN_DEPENDS roscpp velodyne_driver velodyne_msgs
+#  DEPENDS system_lib
+)
+
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+## Declare a C++ executable
+## With catkin_make all packages are built within a single CMake context
+## The recommended prefix ensures that target names across packages don't collide
+ add_executable(velodyne_position_node src/velodyne_position_node.cc)
+ 
+ target_link_libraries(velodyne_position_node
+   ${catkin_LIBRARIES}
+ )
+
