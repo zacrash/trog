@@ -162,10 +162,12 @@ namespace trog_control
     limitDifferentialSpeed(diff_speed_left, diff_speed_right);
 
     // Set up messages
-    roboteq_msgs::Command cmd_left, cmd_right;
+    roboteq_msgs::Command cmd_left;
     cmd_left.mode = roboteq_msgs::MODE_VELOCITY;
-    cmd_right.mode = roboteq_msgs::MODE_VELOCITY;
     cmd_left.setpoint = diff_speed_left;
+
+    roboteq_msgs::Command cmd_right;
+    cmd_right.mode = roboteq_msgs::MODE_VELOCITY;
     cmd_right.setpoint = diff_speed_right;
 
     //Publish
