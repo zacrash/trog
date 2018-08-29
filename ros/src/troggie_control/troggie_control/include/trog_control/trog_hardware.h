@@ -7,7 +7,10 @@
 #include "hardware_interface/robot_hw.h"
 #include "ros/ros.h"
 #include "sensor_msgs/JointState.h"
+
 #include "roboteq_driver/controller.h"
+#include "roboteq_msgs/Command.h"
+
 
 namespace trog_base
 {
@@ -42,6 +45,9 @@ namespace trog_base
 
       // Roboteq motor controller
       roboteq::Controller controller_;
+      ros::Publisher left_motor_pub;
+      ros::Publisher right_motor_pub;
+
 
       // ROS Control interfaces
       hardware_interface::JointStateInterface joint_state_interface_;

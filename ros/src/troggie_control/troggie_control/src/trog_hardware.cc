@@ -20,6 +20,8 @@ namespace trog_control
     private_nh_.param<double>("max_speed", max_speed_, 1.0);
     private_nh_.param<double>("polling_timeout_", polling_timeout_, 10.0);
 
+     vel_pub = n.advertise<roboteq_msgs::Command>("cmd", 50); //TODO: 50?
+
     std::string port = "/dev/ttyUSB0";
     int32_t baud = 115200;
     initMotorController(port, baud);
@@ -159,8 +161,16 @@ namespace trog_control
 
     limitDifferentialSpeed(diff_speed_left, diff_speed_right);
 
-    //TODO: Write to roboteq
-    //horizon_legacy::controlSpeed(diff_speed_left, diff_speed_right, max_accel_, max_accel_);
+    // Set up messages
+    roboteq_msgs::Command cmd_left, cmd_right;
+    cmd_left.mode = roboteq_msgs::MODE_VELOCITY;
+    cmd_right.mode = roboteq_msgs::MODE_VELOCITY;
+    cmd_left.setpoint = diff_speed_left;
+    cmd_right.setpoint = diff_speed_right;
+
+    //Publish
+    left_motor_pub.publish(cmd_left);
+    right_motor_pub.publish(cmd_right);
   }
 
   /**
