@@ -10,3 +10,7 @@ This driver has three command modes: STOPPED, VELOCITY and POSITION. Velocity is
 ### For our purposes... 
 - Publish velocity (rad/s) commands on "/cmd" topic
 - Publish position (rad) command on "/cmd" topic
+
+
+## TODO 
+- Put motor in closed loop speed mode (speed position mode works better at lower speeds - we can experiment)
