@@ -91,9 +91,7 @@
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:troggie_wheel>
 
-  <xacro:troggie_decorate />
-
-  <xacro:if value="$(arg laser_enabled)">
+  <!-- <xacro:if value="$(arg laser_enabled)">
 
     <sick_lms1xx_mount prefix="base"/>
 
@@ -105,7 +103,7 @@
       <child link="base_laser_mount" />
     </joint>
 
-  </xacro:if>
+  </xacro:if> -->
 <!-- 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
