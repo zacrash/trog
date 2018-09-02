@@ -25,31 +25,32 @@ namespace trog_control
 
     std::string port = "/dev/ttyUSB0";
     int32_t baud = 115200;
-    
-    initMotorController(port, baud);
+    roboteq::Controller controller(port.c_str(), baud);
+
+    initMotorController(controller);
     
     registerControlInterfaces();
 
     // TODO: Set up encoders
   }
 
-  void TrogHardware::initMotorController(std::string port, int32_t baud)
+  void TrogHardware::initMotorController(roboteq::Controller& controller) 
   {
-    // Interface to motor controller.
-    controller_ = roboteq::Controller(port.c_str(), baud);
+
+    controller_ = controller;
 
     // Attempt to connect and run.
     while (ros::ok()) {
 
-      ROS_DEBUG("Attempting connection to %s at %i baud.", port.c_str(), baud);
-      controller.connect();
+      ROS_INFO("ATTEMPTING TO CONNECT");
+      controller_.connect();
 
-      if (controller.connected()) {
+      if (controller_.connected()) {
         ROS_INFO("Connected to roboteq...");
         ros::AsyncSpinner spinner(1);
         spinner.start();
         while (ros::ok()) {
-          controller.spinOnce();
+          controller_.spinOnce();
         }
         spinner.stop();
       } else {
