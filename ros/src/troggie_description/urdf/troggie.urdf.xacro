@@ -20,6 +20,9 @@
   <xacro:property name="wheel_length" value="0.1143" />
   <xacro:property name="wheel_radius" value="0.1651" />
 
+  <xacro:include filename="$(find troggie_description)/urdf/wheel.urdf.xacro" />
+
+
   <!-- Base link is the center of the robot's bottom plate -->
   <link name="base_link">
     <visual>
