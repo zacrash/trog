@@ -90,7 +90,7 @@ add_executable(trog_control_node src/trog_control_node.cc)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(trog_control_node
   ${catkin_LIBRARIES}
-  
+  trog_hardware
 )
 
 #############
