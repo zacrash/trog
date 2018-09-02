@@ -43,6 +43,7 @@ class Channel
     void feedbackCallback(std::vector<std::string>);
 
   protected:
+    int debug_helper(double setpoint);
     /**
      * @param x Angular velocity in radians/s.
      * @return Angular velocity in RPM.
