@@ -5,11 +5,11 @@
 #include "hardware_interface/joint_state_interface.h"
 #include "hardware_interface/joint_command_interface.h"
 #include "hardware_interface/robot_hw.h"
-#include "ros/ros.h"
 #include "sensor_msgs/JointState.h"
 
-#include "roboteq_driver/controller.h"
-#include "roboteq_msgs/Command.h"
+#include <ros/ros.h>
+#include <roboteq_msgs/Command.h>
+#include <roboteq_driver/controller.h>
 
 
 namespace trog_base
