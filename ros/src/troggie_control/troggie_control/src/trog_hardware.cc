@@ -36,7 +36,7 @@ namespace trog_control
   void TrogHardware::initMotorController(std::string port, int32_t baud)
   {
     // Interface to motor controller.
-    controller_ = roboteq::Controller(port.c_str(), baud);
+    controller_ = &roboteq::Controller(port.c_str(), baud);
 
     // Attempt to connect and run.
     while (ros::ok()) {
