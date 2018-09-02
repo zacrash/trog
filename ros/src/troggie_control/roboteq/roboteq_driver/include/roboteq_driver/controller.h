@@ -80,7 +80,7 @@ class Controller
     class MessageSender {
       public:
       MessageSender(std::string init, Controller* interface)
-          : init_(init), interface_(interface) {};
+          : init_(init), interface_(interface) {}
 
       template<typename T>
       MessageSender& operator<<(const T val) {
@@ -110,7 +110,7 @@ class Controller
     EOMSend send, sendVerify;
 
   public:
-    Controller() {};
+    Controller();
     Controller (const char *port, int baud);
     ~Controller();
 
