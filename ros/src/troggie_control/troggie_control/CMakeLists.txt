@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(bruinwalker_control)
+project(troggie_control)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,12 +8,14 @@ project(bruinwalker_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  roboteq_driver
+  roboteq_msgs
   controller_manager
   diff_drive_controller
   roboteq_driver
   roboteq_msgs
 )
-
+find_package(Boost REQUIRED COMPONENTS chrono)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -47,8 +49,9 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES trog_hardware
-#  CATKIN_DEPENDS controller_manager diff_drive_controller
-#  DEPENDS system_lib
+  DEPENDS Boost
+  
+  #  CATKIN_DEPENDS controller_manager diff_drive_controller
 )
 
 ###########
@@ -59,12 +62,13 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
  include
-  ${catkin_INCLUDE_DIRS}
-)
+ ${catkin_INCLUDE_DIRS}
+ ${Boost_INCLUDE_DIRS}
+  )
 
 ## Declare a C++ library
 add_library(trog_hardware src/trog_hardware.cc)
-target_link_libraries(trog_hardware ${catkin_LIBRARIES})
+target_link_libraries(trog_hardware ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 
 ## Add cmake target dependencies of the library

@@ -1,5 +1,6 @@
 #include "trog_control/trog_hardware.h"
-
+#include <boost/assign/list_of.hpp>
+#include <string>
 namespace
 {
   const uint8_t LEFT = 0, RIGHT = 1;
@@ -23,8 +24,6 @@ namespace trog_control
      left_motor_pub = nh.advertise<roboteq_msgs::Command>("/left/cmd", 50); //TODO: 50?
      right_motor_pub = nh.advertise<roboteq_msgs::Command>("/right/cmd", 50); //TODO: 50?
 
-    }
-    
     registerControlInterfaces();
 
     // TODO: Set up encoders
@@ -58,8 +57,7 @@ namespace trog_control
   */
   void TrogHardware::registerControlInterfaces()
   {
-    ros::V_string joint_names = boost::assign::list_of("front_left_wheel")
-      ("front_right_wheel")("rear_left_wheel")("rear_right_wheel");
+    ros::V_string joint_names = boost::assign::list_of("rear_left_wheel")("rear_right_wheel");
     for (unsigned int i = 0; i < joint_names.size(); i++)
     {
       hardware_interface::JointStateHandle joint_state_handle(joint_names[i],
@@ -132,15 +130,14 @@ namespace trog_control
 
     // Set up messages
     roboteq_msgs::Command cmd_left;
-    cmd_left.mode = roboteq_msgs::MODE_VELOCITY;
+    cmd_left.mode = cmd_left.MODE_VELOCITY;
     cmd_left.setpoint = diff_speed_left;
 
     roboteq_msgs::Command cmd_right;
-    cmd_right.mode = roboteq_msgs::MODE_VELOCITY;
+    cmd_right.mode = cmd_right.MODE_VELOCITY;
     cmd_right.setpoint = diff_speed_right;
 
     //Publish
-    ROS_INFO("Publishing velocity of " + str(cmd_left.setpoint) + " and " + str(cmd_right.setpoint));
     left_motor_pub.publish(cmd_left);
     right_motor_pub.publish(cmd_right);
   }
