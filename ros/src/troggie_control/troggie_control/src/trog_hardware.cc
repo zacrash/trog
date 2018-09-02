@@ -20,7 +20,8 @@ namespace trog_control
     private_nh_.param<double>("max_speed", max_speed_, 1.0);
     private_nh_.param<double>("polling_timeout_", polling_timeout_, 10.0);
 
-     vel_pub = n.advertise<roboteq_msgs::Command>("cmd", 50); //TODO: 50?
+     left_motor_pub = n.advertise<roboteq_msgs::Command>("/left/cmd", 50); //TODO: 50?
+     right_motor_pub = n.advertise<roboteq_msgs::Command>("/right/cmd", 50); //TODO: 50?
 
     std::string port = "/dev/ttyUSB0";
     int32_t baud = 115200;
