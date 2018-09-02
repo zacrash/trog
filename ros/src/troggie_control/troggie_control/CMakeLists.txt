@@ -46,7 +46,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-#  LIBRARIES bruinwalker_control
+  LIBRARIES trog_hardware
 #  CATKIN_DEPENDS controller_manager diff_drive_controller
 #  DEPENDS system_lib
 )
@@ -63,9 +63,9 @@ include_directories(
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/bruinwalker_control.cpp
-# )
+add_library(trog_hardware src/trog_hardware.cpp)
+target_link_libraries(trog_hardware ${catkin_LIBRARIES})
+
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -90,6 +90,7 @@ add_executable(trog_control_node src/trog_control_node.cc)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(trog_control_node
   ${catkin_LIBRARIES}
+  
 )
 
 #############
