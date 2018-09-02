@@ -61,7 +61,8 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
   if (command.mode == roboteq_msgs::Command::MODE_VELOCITY)
   {
     // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
-    int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0;
+   // int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; ///DEBUG REMOVE ASAP
+    int roboteq_velocity = 400;
     ROS_DEBUG_STREAM("Commanding " << roboteq_velocity << " velocity to motor driver.");
 
     // Write mode and command to the motor driver.
