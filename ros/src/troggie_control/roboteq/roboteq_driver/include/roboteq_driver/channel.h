@@ -99,6 +99,8 @@ class Channel
 
     ros::Time last_feedback_time_;
     uint8_t last_mode_;
+
+    //Control
 };
 
 }

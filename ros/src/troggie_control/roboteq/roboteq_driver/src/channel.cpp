@@ -118,6 +118,11 @@ void Channel::feedbackCallback(std::vector<std::string> fields)
     ROS_WARN("Failure parsing feedback data. Dropping message.");
     return;
   }
+
+  // Set control values
+  _measured_position = msg.measured_position
+  _measured_velocity = msg.measured_velocity
+
   pub_feedback_.publish(msg);
 }
 

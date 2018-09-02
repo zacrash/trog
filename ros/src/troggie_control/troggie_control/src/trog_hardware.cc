@@ -29,7 +29,6 @@ namespace trog_control
     registerControlInterfaces();
 
     // TODO: Set up encoders
-
   }
 
   void TrogHardware::initMotorController(std::string port, int32_t baud)
@@ -44,6 +43,7 @@ namespace trog_control
       controller.connect();
 
       if (controller.connected()) {
+        ROS_INFO("Connected to roboteq...");
         ros::AsyncSpinner spinner(1);
         spinner.start();
         while (ros::ok()) {
@@ -168,6 +168,7 @@ namespace trog_control
     cmd_right.setpoint = diff_speed_right;
 
     //Publish
+    ROS_INFO("Publishing velocity of " + str(cmd_left.setpoint) + " and " + str(cmd_right.setpoint));
     left_motor_pub.publish(cmd_left);
     right_motor_pub.publish(cmd_right);
   }
