@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
 
   // Initialize robot hardware and link to controller manager
-  trog_control::TrogHardware troggie(nh, private_nh, control_frequency);
+  trog_control::TrogHardware troggie(nh, private_nh);
   controller_manager::ControllerManager cm(&troggie, nh);
 
   // Setup separate queue and single-threaded spinner to process timer callbacks
