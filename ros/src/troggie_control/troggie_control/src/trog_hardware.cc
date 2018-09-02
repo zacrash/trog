@@ -107,45 +107,45 @@ namespace trog_control
   void TrogHardware::updateJointsFromHardware()
   {
 
-      // TODO: Update Joints
-      // TODO: Which fucking channel. If there are no namespaces. manually use "/channel_1/feedback"
-    //  ROS_DEBUG_STREAM("Received travel information (L:" << msg.measured_position << " R:" << enc->getTravel(RIGHT) << ")");
-      for (int i = 0; i < 4; i++)
-      {
-        double delta = linearToAngular(enc->getTravel(i % 2)) - joints_[i].position - joints_[i].position_offset;
+    //   // TODO: Update Joints
+    //   // TODO: Which fucking channel. If there are no namespaces. manually use "/channel_1/feedback"
+    // //  ROS_DEBUG_STREAM("Received travel information (L:" << msg.measured_position << " R:" << enc->getTravel(RIGHT) << ")");
+    //   for (int i = 0; i < 4; i++)
+    //   {
+    //     double delta = linearToAngular(enc->getTravel(i % 2)) - joints_[i].position - joints_[i].position_offset;
 
-        // detect suspiciously large readings, possibly from encoder rollover
-        if (std::abs(delta) < 1.0)
-        {
-          joints_[i].position += delta;
-        }
-        else
-        {
-          // suspicious! drop this measurement and update the offset for subsequent readings
-          joints_[i].position_offset += delta;
-          ROS_DEBUG("Dropping overflow measurement from encoder");
-        }
-      }
-    }
+    //     // detect suspiciously large readings, possibly from encoder rollover
+    //     if (std::abs(delta) < 1.0)
+    //     {
+    //       joints_[i].position += delta;
+    //     }
+    //     else
+    //     {
+    //       // suspicious! drop this measurement and update the offset for subsequent readings
+    //       joints_[i].position_offset += delta;
+    //       ROS_DEBUG("Dropping overflow measurement from encoder");
+    //     }
+    //   }
+    // }
 
-    //TODO: Read velocity from motor controller
-    horizon_legacy::Channel<clearpath::DataDifferentialSpeed>::Ptr speed = horizon_legacy::Channel<clearpath::DataDifferentialSpeed>::requestData(
-      polling_timeout_);
-    if (speed)
-    {
-      ROS_DEBUG_STREAM("Received linear speed information (L:" << speed->getLeftSpeed() << " R:" << speed->getRightSpeed() << ")");
-      for (int i = 0; i < 4; i++)
-      {
-        if (i % 2 == LEFT)
-        {
-          joints_[i].velocity = linearToAngular(speed->getLeftSpeed());
-        }
-        else
-        { // assume RIGHT
-          joints_[i].velocity = linearToAngular(speed->getRightSpeed());
-        }
-      }
-    }
+    // //TODO: Read velocity from motor controller
+    // //horizon_legacy::Channel<clearpath::DataDifferentialSpeed>::Ptr speed = horizon_legacy::Channel<clearpath::DataDifferentialSpeed>::requestData(
+    //   polling_timeout_);
+    // if (speed)
+    // {
+    //   ROS_DEBUG_STREAM("Received linear speed information (L:" << speed->getLeftSpeed() << " R:" << speed->getRightSpeed() << ")");
+    //   for (int i = 0; i < 4; i++)
+    //   {
+    //     if (i % 2 == LEFT)
+    //     {
+    //       joints_[i].velocity = linearToAngular(speed->getLeftSpeed());
+    //     }
+    //     else
+    //     { // assume RIGHT
+    //       joints_[i].velocity = linearToAngular(speed->getRightSpeed());
+    //     }
+    //   }
+    // }
   }
 
   /**
