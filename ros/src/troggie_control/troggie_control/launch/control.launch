@@ -1,6 +1,8 @@
 
 <launch>
 
+  <include file="$(find troggie_description)/launch/description.launch" >
+
   <!-- Load controller configuration -->
   <rosparam command="load" file="$(find troggie_control)/config/control.yaml" />
 
