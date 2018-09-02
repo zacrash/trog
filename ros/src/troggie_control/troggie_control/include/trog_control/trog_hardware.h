@@ -30,7 +30,8 @@ namespace trog_control
       void reportLoopDuration(const ros::Duration &duration);
 
     private:
-    
+      void initMotorController(std::string port, int baud);
+      
       void resetTravelOffset();
 
       void registerControlInterfaces();
