@@ -63,7 +63,7 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(trog_hardware src/trog_hardware.cpp)
+add_library(trog_hardware src/trog_hardware.cc)
 target_link_libraries(trog_hardware ${catkin_LIBRARIES})
 
 
