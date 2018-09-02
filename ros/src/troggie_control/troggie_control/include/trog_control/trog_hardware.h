@@ -12,7 +12,7 @@
 #include <roboteq_driver/controller.h>
 
 
-namespace trog_base
+namespace trog_control
 {
 
   /**
