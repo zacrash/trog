@@ -26,7 +26,6 @@ namespace trog_control
     }
     
     registerControlInterfaces();
-
     // TODO: Set up encoders
   }
 

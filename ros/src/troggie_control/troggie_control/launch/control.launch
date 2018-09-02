@@ -1,5 +1,4 @@
 
-<?xml version="1.0"?>
 <launch>
 
   <!-- Load controller configuration -->
@@ -7,8 +6,5 @@
 
   <!-- Spawn controllers -->
   <node name="base_controller_spawner" pkg="controller_manager" type="spawner"
-        args="husky_joint_publisher husky_velocity_controller"/>
-
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
- 
+        args="husky_joint_publisher husky_velocity_controller" output="screen"/> 
 </launch>
