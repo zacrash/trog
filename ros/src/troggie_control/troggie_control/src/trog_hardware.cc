@@ -3,7 +3,7 @@
 namespace
 {
   const uint8_t LEFT = 0, RIGHT = 1;
-  const WHEEL_DIAMETER = 0.254;
+  const double WHEEL_DIAMETER = 0.254;
 };
 
 namespace trog_control

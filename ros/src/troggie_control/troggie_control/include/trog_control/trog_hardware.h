@@ -21,7 +21,7 @@ namespace trog_control
   class TrogHardware : public hardware_interface::RobotHW
   {
     public:
-      TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh, double target_control_freq);
+      TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
       void updateJointsFromHardware();
 
