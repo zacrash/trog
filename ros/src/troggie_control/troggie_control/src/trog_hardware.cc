@@ -104,12 +104,12 @@ namespace trog_control
   }
 
   // TODO: Read from roboteq
-  void TrogHardware::updateJointsFromHardware(roboteq_msgs::Feedback msg)
+  void TrogHardware::updateJointsFromHardware()
   {
 
       // TODO: Update Joints
       // TODO: Which fucking channel. If there are no namespaces. manually use "/channel_1/feedback"
-      ROS_DEBUG_STREAM("Received travel information (L:" << msg.measured_position << " R:" << enc->getTravel(RIGHT) << ")");
+    //  ROS_DEBUG_STREAM("Received travel information (L:" << msg.measured_position << " R:" << enc->getTravel(RIGHT) << ")");
       for (int i = 0; i < 4; i++)
       {
         double delta = linearToAngular(enc->getTravel(i % 2)) - joints_[i].position - joints_[i].position_offset;
