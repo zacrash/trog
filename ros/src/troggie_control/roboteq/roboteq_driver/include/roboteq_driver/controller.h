@@ -110,7 +110,7 @@ class Controller
     EOMSend send, sendVerify;
 
   public:
-    Controller(){}
+    Controller();
     Controller (const char *port, int baud);
     ~Controller();
 
