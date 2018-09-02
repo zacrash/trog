@@ -23,44 +23,13 @@ namespace trog_control
      left_motor_pub = nh.advertise<roboteq_msgs::Command>("/left/cmd", 50); //TODO: 50?
      right_motor_pub = nh.advertise<roboteq_msgs::Command>("/right/cmd", 50); //TODO: 50?
 
-    std::string port = "/dev/ttyUSB0";
-    int32_t baud = 115200;
-    roboteq::Controller controller(port.c_str(), baud);
-
-    initMotorController(controller);
+    }
     
     registerControlInterfaces();
 
     // TODO: Set up encoders
   }
 
-  void TrogHardware::initMotorController(roboteq::Controller& controller) 
-  {
-
-    controller_ = controller;
-
-    // Attempt to connect and run.
-    while (ros::ok()) {
-
-      ROS_INFO("ATTEMPTING TO CONNECT");
-      controller_.connect();
-
-      if (controller_.connected()) {
-        ROS_INFO("Connected to roboteq...");
-        ros::AsyncSpinner spinner(1);
-        spinner.start();
-        while (ros::ok()) {
-          controller_.spinOnce();
-        }
-        spinner.stop();
-      } else {
-        ROS_DEBUG("Problem connecting to serial device.");
-        ROS_ERROR_STREAM_ONCE("Problem connecting to port " << port << ". Trying again every 1 second.");
-        sleep(1);
-      }  
-    }
-
-  }
 
   // TODO: Implement for us
   // /**

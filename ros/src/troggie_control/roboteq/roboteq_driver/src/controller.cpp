@@ -47,26 +47,6 @@ namespace roboteq {
 const std::string eol("\r");
 const size_t max_line_length(128);
 
-Controller::Controller()
-  : nh_("~"), connected_(false), receiving_script_messages_(false),
-    version_(""), start_script_attempts_(0), serial_(NULL),
-    command("!", this), query("?", this), param("^", this)
-{
-  pub_status_ = nh_.advertise<roboteq_msgs::Status>("status", 1);
-  port_ = "uninitialized";
-  baud_ = 11520;
-}
-
-  Controller::Controller( const Controller& other )
-    : nh_("~"), connected_(false), receiving_script_messages_(false),
-    version_(""), start_script_attempts_(0), serial_(NULL),
-    command("!", this), query("?", this), param("^", this)
-    {
-      pub_status_ = other.pub_status_;
-      port_ = other.port_;
-      baud_ = other.baud_;
-    }
-
 Controller::Controller(const char *port, int baud)
   : nh_("~"), port_(port), baud_(baud), connected_(false), receiving_script_messages_(false),
     version_(""), start_script_attempts_(0), serial_(NULL),

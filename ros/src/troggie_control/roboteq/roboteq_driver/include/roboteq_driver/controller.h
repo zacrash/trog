@@ -110,9 +110,7 @@ class Controller
     EOMSend send, sendVerify;
 
   public:
-    Controller();
     Controller (const char *port, int baud);
-    Controller(const Controller& other);
     ~Controller();
 
     void addChannel(Channel* channel);

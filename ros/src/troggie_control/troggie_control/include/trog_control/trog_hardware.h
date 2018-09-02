@@ -29,9 +29,7 @@ namespace trog_control
 
       void reportLoopDuration(const ros::Duration &duration);
 
-    private:
-      void initMotorController(roboteq::Controller &controller);
-      
+    private:      
       void resetTravelOffset();
 
       void registerControlInterfaces();
@@ -45,7 +43,6 @@ namespace trog_control
       ros::NodeHandle nh_, private_nh_;
 
       // Roboteq motor controller
-      roboteq::Controller controller_;
       ros::Publisher left_motor_pub;
       ros::Publisher right_motor_pub;
 
