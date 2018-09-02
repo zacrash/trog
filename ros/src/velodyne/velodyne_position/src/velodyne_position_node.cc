@@ -62,7 +62,7 @@
           {
               ROS_INFO("Publishing nmea data ...");
               ROS_INFO("%s", raw->nmea_sentence);
-              nmea_.publish(raw->nmea_sentence);
+      //        nmea_.publish(raw->nmea_sentence);
           }
           else {
               ROS_ERROR("PPS Error ");
