@@ -1,6 +1,7 @@
 #include "trog_control/trog_hardware.h"
 #include <boost/assign/list_of.hpp>
 #include <string>
+
 namespace
 {
   const uint8_t LEFT = 0, RIGHT = 1;
@@ -11,45 +12,17 @@ namespace trog_control
 {
 
   /**
-  * Initialize Husky hardware
+  * Initialize Trog hardware
   */
   TrogHardware::TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh), private_nh_(private_nh)
   {
-    // TODO: Figure out best parameters
-    private_nh_.param<double>("wheel_diameter", wheel_diameter_, WHEEL_DIAMETER);
-    private_nh_.param<double>("max_accel", max_accel_, 5.0); 
-    private_nh_.param<double>("max_speed", max_speed_, 1.0);
-    private_nh_.param<double>("polling_timeout_", polling_timeout_, 10.0);
-
      left_motor_pub = nh.advertise<roboteq_msgs::Command>("/left/cmd", 50); //TODO: 50?
      right_motor_pub = nh.advertise<roboteq_msgs::Command>("/right/cmd", 50); //TODO: 50?
 
     registerControlInterfaces();
+    
     // TODO: Set up encoders
   }
-
-
-  // TODO: Implement for us
-  // /**
-  // * Get current encoder travel offsets from MCU and bias future encoder readings against them
-  // */
-  // void HuskyHardware::resetTravelOffset()
-  // {
-  //   horizon_legacy::Channel<clearpath::DataEncoders>::Ptr enc = horizon_legacy::Channel<clearpath::DataEncoders>::requestData(
-  //     polling_timeout_);
-  //   if (enc)
-  //   {
-  //     for (int i = 0; i < 4; i++)
-  //     {
-  //       joints_[i].position_offset = linearToAngular(enc->getTravel(i % 2));
-  //     }
-  //   }
-  //   else
-  //   {
-  //     ROS_ERROR("Could not get encoder data to calibrate travel offset");
-  //   }
-  // }
-
 
   /**
   * Register interfaces with the RobotHW interface manager, allowing ros_control operation
@@ -70,6 +43,31 @@ namespace trog_control
     }
     registerInterface(&joint_state_interface_);
     registerInterface(&velocity_joint_interface_);
+  }
+
+    /**
+  * Get latest velocity commands from ros_control via joint structure, and send to MCU
+  */
+  void TrogHardware::writeCommandsToHardware()
+  {
+    double diff_speed_left = joints_[LEFT].velocity_command;
+    double diff_speed_right = joints_[RIGHT].velocity_command;
+
+    // TODO: Figure out how useful this is
+    // limitDifferentialSpeed(diff_speed_left, diff_speed_right);
+
+    // Set up messages
+    roboteq_msgs::Command cmd_left;
+    cmd_left.mode = cmd_left.MODE_VELOCITY;
+    cmd_left.setpoint = diff_speed_left;
+
+    roboteq_msgs::Command cmd_right;
+    cmd_right.mode = cmd_right.MODE_VELOCITY;
+    cmd_right.setpoint = diff_speed_right;
+
+    //Publish
+    left_motor_pub.publish(cmd_left);
+    right_motor_pub.publish(cmd_right);
   }
 
   // TODO: Read from roboteq
@@ -117,33 +115,7 @@ namespace trog_control
     // }
   }
 
-  /**
-  * Get latest velocity commands from ros_control via joint structure, and send to MCU
-  */
-  void TrogHardware::writeCommandsToHardware()
-  {
-    // double diff_speed_left = angularToLinear(joints_[LEFT].velocity_command);
-    // double diff_speed_right = angularToLinear(joints_[RIGHT].velocity_command);
 
-    double diff_speed_left = joints_[LEFT].velocity_command;
-    double diff_speed_right = joints_[RIGHT].velocity_command;
-
-    // TODO: Figure out how useful this is
-    // limitDifferentialSpeed(diff_speed_left, diff_speed_right);
-
-    // Set up messages
-    roboteq_msgs::Command cmd_left;
-    cmd_left.mode = cmd_left.MODE_VELOCITY;
-    cmd_left.setpoint = diff_speed_left;
-
-    roboteq_msgs::Command cmd_right;
-    cmd_right.mode = cmd_right.MODE_VELOCITY;
-    cmd_right.setpoint = diff_speed_right;
-
-    //Publish
-    left_motor_pub.publish(cmd_left);
-    right_motor_pub.publish(cmd_right);
-  }
 
   // /**
   // * Scale left and right speed outputs to maintain ros_control's desired trajectory without saturating the outputs
@@ -159,21 +131,4 @@ namespace trog_control
   //   }
   // }
 
-  /**
-  * Husky reports travel in metres, need radians for ros_control RobotHW
-  */
-  double TrogHardware::linearToAngular(const double &travel) const
-  {
-    return travel / wheel_diameter_ * 2;
-  }
-
-  /**
-  * RobotHW provides velocity command in rad/s, Husky needs m/s,
-  */
-  double TrogHardware::angularToLinear(const double &angle) const
-  {
-    return angle * wheel_diameter_ / 2;
-  }
-
-
-}  // namespace husky_base
+}  // namespace trog_base

@@ -8,7 +8,7 @@
 typedef boost::chrono::steady_clock time_source;
 
 /**
-* Control loop for Husky, not realtime safe
+* Control loop for Trog, not realtime safe
 */
 void controlLoop(trog_control::TrogHardware &troggie,
                  controller_manager::ControllerManager &cm,

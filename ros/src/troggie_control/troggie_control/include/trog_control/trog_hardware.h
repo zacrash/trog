@@ -14,7 +14,6 @@
 
 namespace trog_control
 {
-
   /**
   * Class representing Trog hardware, allows for ros_control to modify internal state via joint interfaces
   */
@@ -23,22 +22,17 @@ namespace trog_control
     public:
       TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
+      // Read data from encoders
       void updateJointsFromHardware();
 
+      // Send commands to roboteq node
       void writeCommandsToHardware();
 
-      void reportLoopDuration(const ros::Duration &duration);
-
-    private:      
-      void resetTravelOffset();
+    private:    
 
       void registerControlInterfaces();
 
-      double linearToAngular(const double &travel) const;
-
-      double angularToLinear(const double &angle) const;
-
-      void limitDifferentialSpeed(double &travel_speed_left, double &travel_speed_right);
+      //void limitDifferentialSpeed(double &travel_speed_left, double &travel_speed_right);
 
       ros::NodeHandle nh_, private_nh_;
 
@@ -46,13 +40,9 @@ namespace trog_control
       ros::Publisher left_motor_pub;
       ros::Publisher right_motor_pub;
 
-
       // ROS Control interfaces
       hardware_interface::JointStateInterface joint_state_interface_;
       hardware_interface::VelocityJointInterface velocity_joint_interface_;
-
-      // ROS Parameters
-      double wheel_diameter_, max_accel_, max_speed_;
 
       double polling_timeout_;
 
