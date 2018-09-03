@@ -128,6 +128,9 @@ namespace trog_control
     double diff_speed_left = joints_[LEFT].velocity_command;
     double diff_speed_right = joints_[RIGHT].velocity_command;
 
+    ROS_INFO_STREAM("Commands are " << diff_speed_left << " and " << diff_speed_right); // This should be in rad/s
+
+
     limitDifferentialSpeed(diff_speed_left, diff_speed_right);
 
     // Set up messages
@@ -139,7 +142,6 @@ namespace trog_control
     cmd_right.mode = cmd_right.MODE_VELOCITY;
     cmd_right.setpoint = diff_speed_right;
 
-    ROS_INFO_STREAM("Commands are " << diff_speed_left << " and " << diff_speed_right); // This should be in rad/s
     //Publish
     left_motor_pub.publish(cmd_left);
     right_motor_pub.publish(cmd_right);
