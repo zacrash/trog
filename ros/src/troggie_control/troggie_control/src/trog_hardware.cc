@@ -128,10 +128,8 @@ namespace trog_control
     double diff_speed_left = joints_[LEFT].velocity_command;
     double diff_speed_right = joints_[RIGHT].velocity_command;
 
-    ROS_INFO_STREAM("Commands are " << diff_speed_left << " and " << diff_speed_right); // This should be in rad/s
-
-
-    limitDifferentialSpeed(diff_speed_left, diff_speed_right);
+    // TODO: Figure out how useful this is
+    // limitDifferentialSpeed(diff_speed_left, diff_speed_right);
 
     // Set up messages
     roboteq_msgs::Command cmd_left;
@@ -147,19 +145,19 @@ namespace trog_control
     right_motor_pub.publish(cmd_right);
   }
 
-  /**
-  * Scale left and right speed outputs to maintain ros_control's desired trajectory without saturating the outputs
-  */
-  void TrogHardware::limitDifferentialSpeed(double &diff_speed_left, double &diff_speed_right)
-  {
-    double large_speed = std::max(std::abs(diff_speed_left), std::abs(diff_speed_right));
+  // /**
+  // * Scale left and right speed outputs to maintain ros_control's desired trajectory without saturating the outputs
+  // */
+  // void TrogHardware::limitDifferentialSpeed(double &diff_speed_left, double &diff_speed_right)
+  // {
+  //   double large_speed = std::max(std::abs(diff_speed_left), std::abs(diff_speed_right));
 
-    if (large_speed > max_speed_)
-    {
-      diff_speed_left *= max_speed_ / large_speed;
-      diff_speed_right *= max_speed_ / large_speed;
-    }
-  }
+  //   if (large_speed > max_speed_)
+  //   {
+  //     diff_speed_left *= max_speed_ / large_speed;
+  //     diff_speed_right *= max_speed_ / large_speed;
+  //   }
+  // }
 
   /**
   * Husky reports travel in metres, need radians for ros_control RobotHW
