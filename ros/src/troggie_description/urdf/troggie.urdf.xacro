@@ -18,7 +18,7 @@
 
   <!-- Wheel Properties -->
   <xacro:property name="wheel_length" value="0.1143" />
-  <xacro:property name="wheel_radius" value="0.5" />
+  <xacro:property name="wheel_radius" value="0.127" />
 
   <xacro:include filename="$(find troggie_description)/urdf/wheel.urdf.xacro" />
 
