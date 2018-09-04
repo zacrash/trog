@@ -11,6 +11,6 @@
 
       <!-- Start control loop and motor controller driver -->
       <include file="$(find roboteq_driver)/launch/roboteq.launch" />
-      <node name="trog_control_node" pkg="trog_control" type="trog_control_node"/>
+      <node name="trog_control_node" pkg="troggie_control" type="trog_control_node"/>
 
 </launch>
