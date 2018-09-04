@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>bruinwalker_sensors</name>
+  <name>trog_sensors</name>
   <version>0.0.0</version>
-  <description>The bruinwalker_sensors package</description>
+  <description>The trog_sensors package</description>
 
   <maintainer email="bsquicciarini@ucla.edu">Brad Squicciarini</maintainer>
 

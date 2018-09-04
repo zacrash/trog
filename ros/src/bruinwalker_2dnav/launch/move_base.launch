@@ -4,16 +4,16 @@
   <!-- <node pkg="tf" type="static_transform_publisher" name="odom_to_map"
       args="0.1 0  0  -1.570796327 0 -1.570796327  /map /odom 100" /> -->
   
-  <!-- <include file="$(find bruinwalker_2dnav)/cfg/amcl.launch" /> -->
+  <!-- <include file="$(find trog_2dnav)/cfg/amcl.launch" /> -->
   <!-- <include file="$(find amcl)/examples/amcl_omni.launch" />
 
-   <node name="map_server" pkg="map_server" type="map_server" args="$(find bruinwalker_2dnav)/testmap0.yaml"/>  -->
+   <node name="map_server" pkg="map_server" type="map_server" args="$(find trog_2dnav)/testmap0.yaml"/>  -->
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find bruinwalker_2dnav)/cfg/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find bruinwalker_2dnav)/cfg/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find bruinwalker_2dnav)/cfg/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find bruinwalker_2dnav)/cfg/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find bruinwalker_2dnav)/cfg/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find trog_2dnav)/cfg/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find trog_2dnav)/cfg/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find trog_2dnav)/cfg/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find trog_2dnav)/cfg/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find trog_2dnav)/cfg/base_local_planner_params.yaml" command="load" />
   </node>
 </launch>

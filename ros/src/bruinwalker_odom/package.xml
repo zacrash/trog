@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>bruinwalker_odom</name>
+  <name>trog_odom</name>
   <version>0.0.0</version>
-  <description>The bruinwalker_odom package</description>
+  <description>The trog_odom package</description>
 
   <maintainer email="bsquicciarini@ucla.edu">Brad Squicciarini</maintainer>
 

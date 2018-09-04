@@ -137,7 +137,7 @@ target_link_libraries(trog_control_node
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_bruinwalker_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_trog_control.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

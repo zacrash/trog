@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>bruinwalker_2dnav</name>
+  <name>trog_2dnav</name>
   <version>0.0.0</version>
-  <description>The bruinwalker_2dnav package</description>
+  <description>The trog_2dnav package</description>
 
   <maintainer email="bsquicciarini@ucla.edu">Brad Squicciarini</maintainer>
 
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <depend>bruinwalker_odom</depend>
-  <depend>bruinwalker_sensors</depend>
+  <depend>trog_odom</depend>
+  <depend>trog_sensors</depend>
   <depend>move_base</depend>
 
 </package>
