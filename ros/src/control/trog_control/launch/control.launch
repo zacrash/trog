@@ -8,4 +8,7 @@
   <!-- Spawn controllers -->
   <node name="base_controller_spawner" pkg="controller_manager" type="spawner"
         args="troggie_joint_publisher troggie_velocity_controller" output="screen"/> 
+
+  <node name="trog_control_node" pkg="troggie_control" type="trog_control_node"
+        args="troggie_joint_publisher troggie_velocity_controller" output="screen"/> 
 </launch>
