@@ -21,7 +21,7 @@ setconfig(_RWD, 110) ' Watchdog timeout, milliseconds (p195)
 
 
 ' Undervoltage/overvoltage limits (p214)
-setconfig(_OVL, 260)
+setconfig(_OVL, 300)
 setconfig(_UVL, 100)
 
 for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
