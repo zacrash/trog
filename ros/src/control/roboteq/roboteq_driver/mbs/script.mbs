@@ -27,9 +27,9 @@ setconfig(_UVL, 280)
 
 for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
 	' Encoder, speed config (p208, p221)
-	setconfig(_EMOD, ch, 50)
-	setconfig(_EPPR, ch, 1024)
-	setconfig(_MXRPM, ch, 3500)
+	setconfig(_EMOD, ch, 18)
+	setconfig(_EPPR, ch, 98)
+	setconfig(_MXRPM, ch, 3500) ' What should max rpms be?
 	setconfig(_CLERD, ch, 0)
 
 	' Current limit (p216)
