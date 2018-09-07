@@ -18,12 +18,11 @@ setcommand(_VAR, 1, -1)
 
 setconfig(_ECHOF, 1) ' Serial echo off (p195)
 setconfig(_RWD, 110) ' Watchdog timeout, milliseconds (p195)
-setconfig(_AMOD, 1, 1) ' Analog input 1 absolute mode
-setconfig(_AMOD, 2, 1) ' Analog input 2 absolute mode
+
 
 ' Undervoltage/overvoltage limits (p214)
-setconfig(_OVL, 700)
-setconfig(_UVL, 280)
+setconfig(_OVL, 260)
+setconfig(_UVL, 100)
 
 for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
 	' Encoder, speed config (p208, p221)
