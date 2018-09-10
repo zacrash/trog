@@ -1,0 +1,10 @@
+<!-- UNTESTED -->
+
+<launch>
+	<node pkg="cartographer_ros" type="cartographer_node" name="cartographer_node"
+	args="
+		-configuration_directory $(find cartographer_ros)/configuration_files
+		-configuration_basename caev_2d.lua"
+	output="screen">
+	</node>
+</launch>
