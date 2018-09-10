@@ -8,7 +8,6 @@ project(trog_2dnav)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  trog_odom
   trog_sensors
   move_base
 )
@@ -105,7 +104,6 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES trog_2dnav
-#  CATKIN_DEPENDS trog_odom trog_sensors trog_tf move_base
 #  DEPENDS system_lib
 )
 

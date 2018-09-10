@@ -3,8 +3,6 @@
     <!-- SENSORS -->
     <include file="$(find trog_sensors)/launch/sensors.launch"/>
 
-    <!-- ODOMETRY -->
-<!--     <node name="fake_odom" pkg="trog_odom" type="test_odom_node"/> -->
 
     <!-- TRANSFORMS -->
     <!-- Velodyne LiDAR -->
