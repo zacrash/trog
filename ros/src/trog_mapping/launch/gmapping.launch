@@ -1,5 +1,0 @@
-<launch>
-    <include file="$(find velodyne_driver)/launch/VLP16_Points.launch"/>
-    <!-- Launch mapping -->
-	<node pkg="gmapping" type="slam_gmapping" name="gmapping"/>
-</launch>

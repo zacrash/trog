@@ -5,8 +5,9 @@
     <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.0 0.0 0.0 0 0.0 0.0 /base_link /laser 50" />
 
   <!-- Razor 9 DOF IMU -->
-  <!-- TODO check to ensure this is right launch file -->
-    <include file="$(find razor_imu_9dof)/launch/razor_pub.launch">
+    <!-- <include file="$(find razor_imu_9dof)/launch/razor-pub.launch">
+      <remap from="/imu" to="/imu/data"/>
+    </include> -->
 
     <!-- Venus GPS -->
     <!-- TODO: Uncomment when GPS is connected -->
