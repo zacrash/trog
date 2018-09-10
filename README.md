@@ -8,3 +8,5 @@ For troggie
 ------------
 ### Running the navigation stack
 - After map is made, run ```$ roslaunch trog_2dnav known_map.launch``` to run navigation stack in a known map. Goal is from lab to outside and back.
+- Call ```rosservice call move_base/global_localization``` at beginning
+- Then launch RViz. ```rosrun rviz rviz```
