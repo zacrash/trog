@@ -1,14 +1,16 @@
 <launch>
     <!-- Velodyne VLP-16 LiDAR -->
-    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
+    <include file="$(find velodyne_driver)/launch/VLP16_points.launch"/>
+    <!-- TODO: Get proper tf -->
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.0 0.0 0.0 0 0.0 0.0 /base_link /laser 50" />
+
+  <!-- Razor 9 DOF IMU -->
+  <!-- TODO check to ensure this is right launch file -->
+    <include file="$(find razor_imu_9dof)/launch/razor_pub.launch">
 
     <!-- Venus GPS -->
     <!-- TODO: Uncomment when GPS is connected -->
     <!-- <node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver"
           args="_port:=/dev/ttyUSB0 _baud:=38400"/> -->
-
-    
-  <!-- <node pkg="IMU_node_pkg" type="IMU_node_type" name="IMU" output="screen">
-  </node> -->
 
 </launch>
