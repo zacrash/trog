@@ -1,0 +1,9 @@
+obstacle_range: 5.0
+raytrace_range: 5.0
+footprint: [[6.5, 7.5], [-6.5, 7.5], [-6.5, -7.5], [6.5, -7.5]]
+inflation_radius: 0.55
+plugins: []
+
+observation_sources: point_cloud_sensor
+
+point_cloud_sensor: { sensor_frame: base_laser, data_type: PointCloud2, topic: /velodyne_points, marking: true, clearing: true}

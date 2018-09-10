@@ -73,7 +73,10 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
     //int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; 
     int roboteq_velocity = (command.setpoint * 150);
 
-    ROS_INFO_STREAM("Commanding " << roboteq_velocity << " velocity to motor driver.");
+    // I Fucked up the wiring... -.-
+    if(channel_num_ == 1)
+      roboteq_velocity *= -1;
+    
     // Write mode and command to the motor driver.
     controller_->command << "G" << channel_num_ << roboteq_velocity << controller_->send;
   }
