@@ -1,8 +1,7 @@
 <launch>
 
     <!-- Make sure to call rosservice call move_base/global_localization -->
-	<!-- TODO: Make map -->
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find trog_mapping)/maps/map.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find trog_mapping)/maps/lab_map.yaml"/>
     
     <!-- Provides odometery from laser scans -->
 	<node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
