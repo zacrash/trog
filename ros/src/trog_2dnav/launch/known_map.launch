@@ -4,8 +4,8 @@
     
     <!-- Provides odometery from laser scans -->
 	<node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="laser_scan_matcher_node" output="screen">
-        <param name="base_frame" value = "/base_link"/>
-        <param name="fixed_frame" value = "/odom"/>
+        <param name="base_frame" value="/base_link"/>
+        <param name="fixed_frame" value="/odom"/>
         <param name="use_cloud_input" value="false"/>
         <param name="publish_tf" value="true"/>
         <param name="publish_odom" value="true"/>
@@ -16,14 +16,14 @@
     </node>
 
     <!-- Provides localization within known map -->
-    <include file="$(find amcl)/examples/amcl_diff.launch"/>
+<!--    <include file="$(find amcl)/examples/amcl_diff.launch"/>
 
-    <!-- Start move_base for autonomous navigation-->
+
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find trog_2dnav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
         <rosparam file="$(find trog_2dnav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find trog_2dnav)/config/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find trog_2dnav)/config/global_costmap_params.yaml" command="load" />
         <rosparam file="$(find trog_2dnav)/config/base_local_planner_params.yaml" command="load" />
-    </node>
+    </node> -->
 </launch>
