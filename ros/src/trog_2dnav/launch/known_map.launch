@@ -21,7 +21,7 @@
 
     <!-- Provides localization within known map -->
     <include file="$(find amcl)/examples/amcl_diff.launch">
-        <param name="odom_frame_id" value="/map">
+        <param name="odom_frame_id" value="/map"/>
     </include>
 <!-- 
 
