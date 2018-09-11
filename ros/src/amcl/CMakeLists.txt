@@ -1,25 +1,17 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 2.8.3)
 project(amcl)
 
-if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 11)
-endif()
-
 find_package(catkin REQUIRED
-  COMPONENTS
-    dynamic_reconfigure
-    geometry_msgs
-    message_filters
-    nav_msgs
-    rosbag
-    roscpp
-    sensor_msgs
-    std_srvs
-    tf2
-    tf2_geometry_msgs
-    tf2_msgs
-    tf2_ros
-)
+        COMPONENTS
+            message_filters
+            rosbag
+            roscpp
+            std_srvs
+            tf
+            dynamic_reconfigure
+            nav_msgs
+            std_srvs
+        )
 
 find_package(Boost REQUIRED)
 
@@ -29,17 +21,12 @@ generate_dynamic_reconfigure_options(
 )
 
 catkin_package(
-  CATKIN_DEPENDS
-    dynamic_reconfigure
-    geometry_msgs
-    nav_msgs
-    rosbag
-    roscpp
-    sensor_msgs
-    std_srvs
-    tf2
-    tf2_msgs
-    tf2_ros
+    CATKIN_DEPENDS
+        rosbag
+        roscpp
+        dynamic_reconfigure
+        tf
+  CATKIN_DEPENDS nav_msgs std_srvs
   INCLUDE_DIRS include
   LIBRARIES amcl_sensors amcl_map amcl_pf
 )

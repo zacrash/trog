@@ -2,82 +2,46 @@
 Changelog for package amcl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.16.2 (2018-07-31)
+1.14.4 (2018-06-19)
 -------------------
-* Merge pull request `#773 <https://github.com/ros-planning/navigation/issues/773>`_ from ros-planning/packaging_fixes
-  packaging fixes
-* update amcl to have proper depends
-  * add geometry_msgs
-  * add tf2_msgs
-  * fix alphabetical order
-* Contributors: Michael Ferguson
-
-1.16.1 (2018-07-28)
--------------------
-* Merge pull request `#770 <https://github.com/ros-planning/navigation/issues/770>`_ from ros-planning/fix_debians
-  Fix debian builds (closes `#769 <https://github.com/ros-planning/navigation/issues/769>`_)
-* make AMCL depend on sensor_msgs
-  previously, amcl depended on TF, which depended on
-  sensor_msgs.
-* Contributors: Michael Ferguson
-
-1.16.0 (2018-07-25)
--------------------
-* Switch to TF2 `#755 <https://github.com/ros-planning/navigation/issues/755>`_
-* Merge pull request `#734 <https://github.com/ros-planning/navigation/issues/734>`_ from ros-planning/melodic_731
-  AMCL dynamic reconfigure: Extend parameter range (Forward port `#731 <https://github.com/ros-planning/navigation/issues/731>`_)
-* Merge pull request `#728 <https://github.com/ros-planning/navigation/issues/728>`_ from ros-planning/melodic_tf2_conversion
-  switch AMCL to use TF2
-* fix swapped odom1/4 in omni model, fixes `#499 <https://github.com/ros-planning/navigation/issues/499>`_
-* Merge pull request `#730 <https://github.com/ros-planning/navigation/issues/730>`_ from Glowcloud/melodic-devel
-  Fix for Potential Memory Leak  in AmclNode::reconfigureCB `#729 <https://github.com/ros-planning/navigation/issues/729>`_
-* Fix for Potential Memory Leak  in AmclNode::reconfigureCB
-* switch AMCL to use TF2
-* Merge pull request `#727 <https://github.com/ros-planning/navigation/issues/727>`_ from ros-planning/melodic_668
-  Update laser_model_type enum on AMCL.cfg (Melodic port of `#668 <https://github.com/ros-planning/navigation/issues/668>`_)
-* Update laser_model_type enum on AMCL.cfg
+* Merge pull request `#731 <https://github.com/ros-planning/navigation/issues/731>`_ from maracuya-robotics/kinetic/amcl-dynamic-reconfigure
+  AMCL dynamic reconfigure: Extend parameter range
+* In Addition to `#696 <https://github.com/ros-planning/navigation/issues/696>`_, which checks the input arguments, this extends the
+  allowed parameter range in dynamic reconfigure. The description for
+  "save_pose_rate" says "-1.0 to disable" but allowed only positive values
+  previously.
+  Also increase maximum value for laser_max_beams for high performance
+  systems.
+* Merge pull request `#668 <https://github.com/ros-planning/navigation/issues/668>`_ from B0gdar/kinetic-devel
+  Update laser_model_type enum on AMCL.cfg
   Adding likelihood_field_prob laser model option on AMCL.cfg to be able to control dynamic parameters with this laser sensor model.
-* Merge pull request `#723 <https://github.com/ros-planning/navigation/issues/723>`_ from moriarty/melodic-buildfarm-errors
-  Melodic buildfarm errors
-* include <memory> for std::shared_ptr
-* Merge pull request `#718 <https://github.com/ros-planning/navigation/issues/718>`_ from moriarty/tf2-buffer-ptr
-  [melodic] tf2_buffer\_ -> tf2_buffer_ptr\_
-* [melodic] tf2_buffer\_ -> tf2_buffer_ptr\_
-  Change required due to changes in upstream dependencies:
-  `ros/geometry#163 <https://github.com/ros/geometry/issues/163>`_: "Maintain & expose tf2 Buffer in shared_ptr for tf"
-  fixes `ros-planning/navigation#717 <https://github.com/ros-planning/navigation/issues/717>`_ (for compile errors at least.)
-* Contributors: Alexander Moriarty, Glowcloud, Martin Ganeff, Michael Ferguson, Miguel Cordero, Vincent Rabaud, maracuya-robotics
+* Contributors: Michael Ferguson, Miguel Cordero, maracuya-robotics
 
-1.15.2 (2018-03-22)
+1.14.3 (2018-03-16)
 -------------------
-* Fix minor typo (`#682 <https://github.com/ros-planning/navigation/issues/682>`_)
-  This typo caused some confusion because we were searching for a semicolon in our configuration.
-* Merge pull request `#677 <https://github.com/ros-planning/navigation/issues/677>`_ from ros-planning/lunar_634
+* Merge pull request `#678 <https://github.com/ros-planning/navigation/issues/678>`_ from SammysHP/patch-1
+  Fix minor typo
+* Merge pull request `#666 <https://github.com/ros-planning/navigation/issues/666>`_ from SteveMacenski/kinetic-devel
   removing recomputation of cluster stats causing assertion error (`#634 <https://github.com/ros-planning/navigation/issues/634>`_)
-* Merge pull request `#673 <https://github.com/ros-planning/navigation/issues/673>`_ from ros-planning/email_update_lunar
-  update maintainer email (lunar)
-* Remove Dead Code [Lunar] (`#646 <https://github.com/ros-planning/navigation/issues/646>`_)
-  * Clean up navfn
-  * Cleanup amcl
-* Merge pull request `#649 <https://github.com/ros-planning/navigation/issues/649>`_ from aaronhoy/lunar_add_ahoy
+* Merge pull request `#672 <https://github.com/ros-planning/navigation/issues/672>`_ from ros-planning/email_update_kinetic
+  update maintainer email (kinetic)
+* Merge pull request `#648 <https://github.com/ros-planning/navigation/issues/648>`_ from aaronhoy/kinetic_add_ahoy
   Add myself as a maintainer.
-* Contributors: Aaron Hoy, David V. Lu!!, Michael Ferguson, stevemacenski
+* Contributors: Aaron Hoy, Michael Ferguson, SammysHP, stevemacenski
 
-1.15.1 (2017-08-14)
+1.14.2 (2017-08-14)
 -------------------
 
-1.15.0 (2017-08-07)
+1.14.1 (2017-08-07)
 -------------------
 * Reference Issue `#592 <https://github.com/ros-planning/navigation/issues/592>`_ Added warning to AMCL when map is published on ... (`#604 <https://github.com/ros-planning/navigation/issues/604>`_)
-* rebase fixups
-* convert packages to format2
 * recompute cluster stat when force_publication
 * Fix CMakeLists + package.xmls (`#548 <https://github.com/ros-planning/navigation/issues/548>`_)
 * amcl: fix compilation with gcc v7
 * Added deps to amcl costmap_2d move_base (`#512 <https://github.com/ros-planning/navigation/issues/512>`_)
 * fix order of parameters (closes `#553 <https://github.com/ros-planning/navigation/issues/553>`_)
 * Fix potential string overflow and resource leak
-* Contributors: Dmitry Rozhkov, Laurent GEORGE, Martin Günther, Michael Ferguson, Mikael Arguedas, Peter Harliman Liem, mryellow, vik748
+* Contributors: Dmitry Rozhkov, Laurent GEORGE, Martin Günther, Michael Ferguson, Peter Harliman Liem, mryellow, vik748
 
 1.14.0 (2016-05-20)
 -------------------
