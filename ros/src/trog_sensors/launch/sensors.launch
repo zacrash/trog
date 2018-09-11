@@ -2,7 +2,7 @@
     <!-- Velodyne VLP-16 LiDAR -->
     <include file="$(find velodyne_driver)/launch/VLP16_points.launch"/>
     <!-- TODO: Get proper tf -->
-    <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.0 0.0 0.0 0 0.0 0.0 /base_link /laser 50" />
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.0 0.0 0.0 0 0.0 0.0 /base_footprint /laser 50" />
 
   <!-- Razor 9 DOF IMU -->
     <!-- <include file="$(find razor_imu_9dof)/launch/razor-pub.launch">
