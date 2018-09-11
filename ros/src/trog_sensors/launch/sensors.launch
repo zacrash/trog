@@ -1,6 +1,8 @@
 <launch>
     <!-- Velodyne VLP-16 LiDAR -->
-    <include file="$(find velodyne_driver)/launch/VLP16_points.launch"/>
+    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
+      <param name="frame_id " value="laser"/>
+    </include>
     <!-- TODO: Get proper tf -->
 
   <!-- Razor 9 DOF IMU -->

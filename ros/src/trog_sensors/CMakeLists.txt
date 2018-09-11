@@ -8,11 +8,10 @@ project(trog_sensors)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  velodyne_driver
-  velodyne_driver
-  velodyne_laserscan
-  velodyne_msgs
-  velodyne_pointcloud
+#  velodyne_driver
+#  velodyne_laserscan
+#  velodyne_msgs
+#  velodyne_pointcloud
 )
 
 ## System dependencies are found with CMake's conventions
