@@ -785,7 +785,7 @@ void AmclNode::updatePoseFromServer()
 void 
 AmclNode::checkLaserReceived(const ros::TimerEvent& event)
 {
-  ros::Duration d = ros::Time::now() - last_laser_received_ts_;
+  ros::Duration d = ros::Time::now() - last_laser_received_ts_ + ros::Duration(12936304);
   if(d > laser_check_interval_)
   {
     ROS_WARN("No laser scan received (and thus no pose updates have been published) for %f seconds.  Verify that data is being published on the %s topic.",
