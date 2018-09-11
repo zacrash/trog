@@ -10,7 +10,7 @@ typedef boost::chrono::steady_clock time_source;
 /**
 * Control loop for Trog, not realtime safe
 */
-void controlLoop(trog_control::TrogHardware &troggie,
+void controlLoop(trog_control::TrogHardware &trog,
                  controller_manager::ControllerManager &cm,
                  time_source::time_point &last_time)
 {
@@ -22,9 +22,9 @@ void controlLoop(trog_control::TrogHardware &troggie,
   last_time = this_time;
 
   // Process control loop
-  troggie.updateJointsFromHardware();
+  trog.updateJointsFromHardware();
   cm.update(ros::Time::now(), elapsed);
-  troggie.writeCommandsToHardware();
+  trog.writeCommandsToHardware();
 }
 
 int main(int argc, char *argv[])
@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
 
   ROS_INFO("Initializing...");
   // Initialize robot hardware and link to controller manager
-  trog_control::TrogHardware troggie(nh, private_nh);
-  controller_manager::ControllerManager cm(&troggie, nh);
+  trog_control::TrogHardware trog(nh, private_nh);
+  controller_manager::ControllerManager cm(&trog, nh);
 
 
   // Setup separate queue and single-threaded spinner to process timer callbacks
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
   time_source::time_point last_time = time_source::now();
   ros::TimerOptions control_timer(
     ros::Duration(1 / control_frequency),
-    boost::bind(controlLoop, boost::ref(troggie), boost::ref(cm), boost::ref(last_time)),
+    boost::bind(controlLoop, boost::ref(trog), boost::ref(cm), boost::ref(last_time)),
     &trog_queue);
   ros::Timer control_loop = nh.createTimer(control_timer);
 

@@ -1,4 +1,4 @@
-Troggie_Control TODOs
+trog_Control TODOs
 =====
 
 ## About

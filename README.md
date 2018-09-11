@@ -1,5 +1,5 @@
 # miniature-parakeet
-For troggie
+For trog
 
 ## Tonight's TODOs
 ### Getting the map

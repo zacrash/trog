@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="troggie" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="trog" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:arg name="robot_namespace" default="/" />
   <xacro:arg name="urdf_extras" default="empty.urdf" />
@@ -20,7 +20,7 @@
   <xacro:property name="wheel_length" value="0.1143" />
   <xacro:property name="wheel_radius" value="0.127" />
 
-  <xacro:include filename="$(find troggie_description)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find trog_description)/urdf/wheel.urdf.xacro" />
 
 
   <!-- Base link is the center of the robot's bottom plate -->
@@ -78,18 +78,18 @@
   </gazebo>
 
   <!-- Husky wheel macros -->
-  <xacro:troggie_wheel wheel_prefix="front_left">
+  <xacro:trog_wheel wheel_prefix="front_left">
     <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:troggie_wheel>
-  <xacro:troggie_wheel wheel_prefix="front_right">
+  </xacro:trog_wheel>
+  <xacro:trog_wheel wheel_prefix="front_right">
     <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:troggie_wheel>
-  <xacro:troggie_wheel wheel_prefix="rear_left">
+  </xacro:trog_wheel>
+  <xacro:trog_wheel wheel_prefix="rear_left">
     <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:troggie_wheel>
-  <xacro:troggie_wheel wheel_prefix="rear_right">
+  </xacro:trog_wheel>
+  <xacro:trog_wheel wheel_prefix="rear_right">
     <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
-  </xacro:troggie_wheel>
+  </xacro:trog_wheel>
 
   <!-- <xacro:if value="$(arg laser_enabled)">
 

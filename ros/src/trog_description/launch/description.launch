@@ -1,7 +1,7 @@
 <launch>
   <arg name="robot_namespace" default="/"/>
 
-  <param name="robot_description" command="$(find xacro)/xacro '$(find troggie_description)/urdf/troggie.urdf.xacro'
+  <param name="robot_description" command="$(find xacro)/xacro '$(find trog_description)/urdf/trog.urdf.xacro'
     --inorder
     robot_namespace:=$(arg robot_namespace)
     " />

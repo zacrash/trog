@@ -1,8 +1,8 @@
-troggie_joint_publisher:
+trog_joint_publisher:
   type: "joint_state_controller/JointStateController"
   publish_rate: 50
 
-troggie_velocity_controller:
+trog_velocity_controller:
   type: "diff_drive_controller/DiffDriveController"
   # Encoders are connected from the back wheels
   left_wheel: ['rear_left_wheel'] 
