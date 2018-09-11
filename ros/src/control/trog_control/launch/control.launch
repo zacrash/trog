@@ -1,16 +1,16 @@
 <launch>
 
-      <include file="$(find troggie_description)/launch/description.launch" />
+      <include file="$(find trog_description)/launch/description.launch" />
 
       <!-- Load controller configuration -->
-      <rosparam command="load" file="$(find troggie_control)/config/control.yaml" />
+      <rosparam command="load" file="$(find trog_control)/config/control.yaml" />
 
       <!-- Spawn controllers -->
       <node name="base_controller_spawner" pkg="controller_manager" type="spawner"
-      args="troggie_joint_publisher troggie_velocity_controller" output="screen"/> 
+      args="trog_joint_publisher trog_velocity_controller" output="screen"/> 
 
       <!-- Start control loop and motor controller driver -->
       <include file="$(find roboteq_driver)/launch/roboteq.launch" />
-      <node name="trog_control_node" pkg="troggie_control" type="trog_control_node"/>
+      <node name="trog_control_node" pkg="trog_control" type="trog_control_node"/>
 
 </launch>

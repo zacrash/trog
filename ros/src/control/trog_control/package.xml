@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>troggie_control</name>
+  <name>trog_control</name>
   <version>0.0.0</version>
   <description>The trog_control package</description>
 
