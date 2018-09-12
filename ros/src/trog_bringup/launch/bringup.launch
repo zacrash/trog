@@ -1,7 +1,4 @@
 <launch>
-    <!-- Launch sensors -->
-    <include file="$(find trog_sensors)/launch/sensors.launch"/>
-
     <!-- Start control nodes -->
     <include file="$(find trog_control)/launch/control.launch"/>
 </launch>
