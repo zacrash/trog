@@ -14,7 +14,7 @@ For troggie ~.~
     $ rosrun trog_2dnav known_map.launch
 
     # Reset AMCL
-    $ rosservice call move_base/global_localization
+    $ rosservice call /global_localization
 
     # Send Nav goal via RViz
 
