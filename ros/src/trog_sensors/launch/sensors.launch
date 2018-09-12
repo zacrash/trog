@@ -6,9 +6,9 @@
     <!-- TODO: Get proper tf -->
 
   <!-- Razor 9 DOF IMU -->
-    <!-- <include file="$(find razor_imu_9dof)/launch/razor-pub.launch">
+    <include file="$(find razor_imu_9dof)/launch/razor-pub.launch">
       <remap from="/imu" to="/imu/data"/>
-    </include> -->
+    </include>
 
     <!-- Venus GPS -->
     <!-- TODO: Uncomment when GPS is connected -->

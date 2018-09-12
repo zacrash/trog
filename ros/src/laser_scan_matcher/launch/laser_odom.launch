@@ -10,7 +10,6 @@ Example launch file: launches the scan matcher with pre-recorded data
     <param name="use_imu" value="true"/>
     <param name="publish_tf" value="true"/>
     <param name="max_iterations" value="10"/>
-    <remap from="imu/data" to="imu" />
   </node>
 
 </launch>
