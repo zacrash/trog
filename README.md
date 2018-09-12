@@ -17,6 +17,16 @@ For troggie ~.~
     $ rosservice call /global_localization
 
     # Send Nav goal via RViz
+    
+## DEMO
+    # Run this
+        rostopic pub /path_ready std_msgs/Empty -1
+
+    # Buffer move base goals using RViz
+    # Use RViz’s "2D Pose Estimate" tool to create waypoints with mouse clicks.
+
+    # Follow waypoints
+        rostopic pub /path_ready std_msgs/Empty -1
 
 
 ## Tonight's TODOs
