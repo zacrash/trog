@@ -1,10 +1,10 @@
 obstacle_range: 5.0
 raytrace_range: 6.0
 # TODO: Measaure exact numbers
-footprint: [[6.5, 7.5], [-6.5, 7.5], [-6.5, -7.5], [6.5, -7.5]]
+footprint: [[0.3, 0.3], [-0.3, 0.3], [-0.3, -0.3], [0.3, -0.3]]
 inflation_radius: 0.55
 plugins: []
 
-observation_sources: point_cloud_sensor
+observation_sources: laser_scan_sensor
 
-point_cloud_sensor: { sensor_frame: laser, data_type: PointCloud2, topic: /velodyne_points, marking: true, clearing: true}
+laser_scan_sensor: { sensor_frame: laser, data_type: LaserScan, topic: /scan, marking: true, clearing: true}
