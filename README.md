@@ -13,7 +13,7 @@ Trog is a pilot mobile battery energy storage system that works in integration w
     * [ ] Replace exisiting sprockets with D-shaft
 
 ## Milestones
-* [X] Teleop working
+* [X] Teleoperation
 * [ ] Indoor waypoint following
 * [ ] Outdoor waypoint following
 * [ ] Outdoor path planning and navigation
