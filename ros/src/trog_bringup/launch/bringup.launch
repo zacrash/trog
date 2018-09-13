@@ -1,4 +1,11 @@
 <launch>
     <!-- Start control nodes -->
     <include file="$(find trog_control)/launch/control.launch"/>
+
+    <!-- Start sensors nodes -->
+    <include file="$(find trog_sensors)/launch/sensors.launch"/>
+
+    <include file="$(find trog_mapping)/launch/create_map.launch"/>
+
+    <include file="$(find trog_2dnav)/launch/move_base.launch"/>
 </launch>
