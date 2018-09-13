@@ -5,7 +5,9 @@ Trog is a pilot mobile battery energy storage system that works in integration w
 
     Software
     - Install AMCL and Map Server and remove folder
+    - Implement trog_odom
     - Configure move_base parameters
+    - Make URDF to be correct
 
     Hardware
     - Wire encoders
