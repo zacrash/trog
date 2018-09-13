@@ -26,13 +26,15 @@ User Guide
 ===
     # Get robot up and running
     $ roslaunch trog_bringup bringup.launch
+    
+    ------------------------------------------
 
-    # Now autonomous navigation within a known map
+    # Autonomous navigation within a known map
     $ rosrun trog_2dnav known_map.launch
 
     OR
 
-    # Run teleop to show mobility
+    # Teleop
     $  rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/trog_velocity_controller/cmd_vel
     
 
