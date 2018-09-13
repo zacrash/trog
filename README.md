@@ -1,16 +1,17 @@
 # Trog
 Trog is a pilot mobile battery energy storage system that works in integration with the grid to deliver on-demand energy.  
 
-## TODOs
+ToDo List
+========
 
-Software
+#### Software
 * [ ] Install AMCL and Map Server and remove folder
 * [ ] Get GPS readings
 * [ ] Implement trog_odom
 * [ ] Configure move_base parameters
 * [ ] Make URDF to be correct
 
-Hardware
+#### Hardware
 * [ ] Wire encoders
 * [ ] Connect IMU to Jetson via serial port
 * [ ] Replace exisiting sprockets with D-shaft
@@ -21,7 +22,8 @@ Hardware
 * [ ] Outdoor waypoint following
 * [ ] Outdoor path planning and navigation
 
-## User Guide
+User Guide
+===
     # Get robot up and running
     $ roslaunch trog_bringup bringup.launch
 
