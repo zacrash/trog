@@ -2,9 +2,15 @@
 Trog is a pilot mobile battery energy storage system that works in integration with the grid to deliver on-demand energy.  
 
 ## TODOs
-* [ ] Wire encoders
-* [ ] Connect IMU to Jetson via serial port
-* [ ] Replace exisiting sprockets with D-shaft
+
+    Software
+    * [ ] Install AMCL and Map Server and remove folder
+    * [ ] Configure move_base parameters
+
+    Hardware
+    * [ ] Wire encoders
+    * [ ] Connect IMU to Jetson via serial port
+    * [ ] Replace exisiting sprockets with D-shaft
 
 ## Milestones
 * [X] Teleop working
