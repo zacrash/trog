@@ -13,7 +13,7 @@ ToDo List
 
 #### Hardware
 * [ ] Wire encoders
-* [ ] Connect IMU to Jetson via serial port
+* [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
 * [ ] Replace exisiting sprockets with D-shaft
 
 ## Milestones
