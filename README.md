@@ -1,38 +1,41 @@
-# miniature-parakeet
-For troggie ~.~
+# Trog
+Trog is a pilot mobile battery energy storage system that works in integration with the grid to deliver on-demand energy.  
 
-## User Guide
+ToDo List
+========
+
+#### Software
+* [ ] Install AMCL and Map Server and remove folder
+* [ ] Get GPS readings
+* [ ] Implement trog_odom
+* [ ] Configure move_base parameters
+* [ ] Make URDF to be correct
+
+#### Hardware
+* [ ] Wire encoders
+* [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
+* [ ] Replace exisiting sprockets with D-shaft
+
+## Milestones
+* [X] Teleoperation
+* [ ] Indoor waypoint following
+* [ ] Outdoor waypoint following
+* [ ] Outdoor path planning and navigation
+
+User Guide
+===
     # Get robot up and running
     $ roslaunch trog_bringup bringup.launch
     
-    # Run teleop to show mobility
-    $  rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/trog_velocity_controller/cmd_vel
+    ------------------------------------------
 
-
-
-    # Now show move base
+    # Autonomous navigation within a known map
     $ rosrun trog_2dnav known_map.launch
 
-    # Reset AMCL
-    $ rosservice call /global_localization
+    OR
 
-    # Send Nav goal via RViz
+    # Teleop
+    $  rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/trog_velocity_controller/cmd_vel
     
-## DEMO
-    # Run this
-        rostopic pub /path_ready std_msgs/Empty -1
-
-    # Buffer move base goals using RViz
-    # Use RViz’s "2D Pose Estimate" tool to create waypoints with mouse clicks.
-
-    # Follow waypoints
-        rostopic pub /path_ready std_msgs/Empty -1
 
 
-## Tonight's TODOs
-### Map entire 4th floor of engineering
-
-### Running the navigation stack
-- After map is made, run ```$ roslaunch trog_2dnav known_map.launch``` to run navigation stack in a known map. Goal is from lab to outside and back.
-- Call ```rosservice call move_base/global_localization``` at beginning
-- Then launch RViz. ```rosrun rviz rviz```
