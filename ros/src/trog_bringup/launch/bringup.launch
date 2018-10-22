@@ -7,5 +7,5 @@
 
     <include file="$(find trog_mapping)/launch/create_map.launch"/>
 
-    <include file="$(find trog_2dnav)/launch/move_base.launch"/>
+    <!--<include file="$(find trog_2dnav)/launch/move_base.launch"/>-->
 </launch>
