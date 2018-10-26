@@ -74,45 +74,16 @@ namespace trog_control
   void TrogHardware::updateJointsFromHardware()
   {
 
-    //   // TODO: Update Joints
-    //   // TODO: Which fucking channel. If there are no namespaces. manually use "/channel_1/feedback"
-    // //  ROS_DEBUG_STREAM("Received travel information (L:" << msg.measured_position << " R:" << enc->getTravel(RIGHT) << ")");
-    //   for (int i = 0; i < 4; i++)
-    //   {
-    //     double delta = linearToAngular(enc->getTravel(i % 2)) - joints_[i].position - joints_[i].position_offset;
+    ros::ServiceClient client = nh_.ServiceClient<roboteq_driver::Feedback>("get_feedback");
+    roboteq_driver::Feedback srv;
 
-    //     // detect suspiciously large readings, possibly from encoder rollover
-    //     if (std::abs(delta) < 1.0)
-    //     {
-    //       joints_[i].position += delta;
-    //     }
-    //     else
-    //     {
-    //       // suspicious! drop this measurement and update the offset for subsequent readings
-    //       joints_[i].position_offset += delta;
-    //       ROS_DEBUG("Dropping overflow measurement from encoder");
-    //     }
-    //   }
-    // }
-
-    // //TODO: Read velocity from motor controller
-    // //horizon_legacy::Channel<clearpath::DataDifferentialSpeed>::Ptr speed = horizon_legacy::Channel<clearpath::DataDifferentialSpeed>::requestData(
-    //   polling_timeout_);
-    // if (speed)
-    // {
-    //   ROS_DEBUG_STREAM("Received linear speed information (L:" << speed->getLeftSpeed() << " R:" << speed->getRightSpeed() << ")");
-    //   for (int i = 0; i < 4; i++)
-    //   {
-    //     if (i % 2 == LEFT)
-    //     {
-    //       joints_[i].velocity = linearToAngular(speed->getLeftSpeed());
-    //     }
-    //     else
-    //     { // assume RIGHT
-    //       joints_[i].velocity = linearToAngular(speed->getRightSpeed());
-    //     }
-    //   }
-    // }
+    for (int channel_num = 1; channel_num <= 2; i++) {
+      srv.request.channel = channel_num;
+      if (client.call(srv))
+        joints_[i].velocity = srv.response.measuredVelocity;
+      else
+        ROS_ERROR("Failed to call service get_feedbac with channel number: %d", channel_num);
+    }
   }
 
 

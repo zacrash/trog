@@ -29,6 +29,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "roboteq_msgs/Status.h"
 #include "serial/serial.h"
 
+// For ROS Service, allows for "on demand" feedback
+#include "roboteq_driver/Feedback.h"
+
 #include <boost/bind.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -242,6 +245,19 @@ bool Controller::downloadScript() {
     ROS_DEBUG_STREAM_NAMED("serial", "ACK-RX: " << ack);
     if (ack != "+\r") return false;
     line_num++;
+  }
+  return true;
+}
+
+
+bool Controller::getFeedback(roboteq_driver::Feedback::Request  &req,
+                                     roboteq_driver::Feedback::Response &res)
+{
+    if (channel_num >= 1 && channel_num <= channels_.size()) {
+      res.measuredVelocity = channels_[req.channel]->getMeasuredVelocity();
+  } else {
+    ROS_WARN("Bad channel number. Dropping message.");
+    return false;
   }
   return true;
 }

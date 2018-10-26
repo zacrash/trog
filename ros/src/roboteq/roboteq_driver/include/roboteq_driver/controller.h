@@ -63,6 +63,8 @@ class Controller
     void processStatus(std::string msg);
     void processFeedback(std::string msg);
 
+    bool getFeedback(roboteq_driver::Feedback::Request  &req, roboteq_driver::Feedback::Response &res)
+
   protected:
     // These data members are the core of the synchronization strategy in this class.
     // In short, the sendWaitAck method blocks on receiving an ack, which is passed to

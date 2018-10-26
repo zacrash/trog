@@ -6,6 +6,12 @@ find_package(catkin REQUIRED COMPONENTS roboteq_msgs roscpp serial)
 catkin_package(
   INCLUDE_DIRS include
 )
+
+add_service_files(
+    FILES
+    Feedback.srv
+)
+
 # Build and install binary driver.
 include_directories(include ${catkin_INCLUDE_DIRS})
 add_subdirectory(mbs)

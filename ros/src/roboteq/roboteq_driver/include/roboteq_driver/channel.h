@@ -42,6 +42,9 @@ class Channel
     Channel(int channel_num, std::string ns, Controller* controller);
     void feedbackCallback(std::vector<std::string>);
 
+    // Used to conform to ROS Control interface
+    double getMeasuredVelocity() { return _measured_velocity;}
+
   protected:
     int debug_helper(double setpoint);
     /**
@@ -102,6 +105,7 @@ class Channel
     uint8_t last_mode_;
 
     //Control
+    double _measured_velocity;
 };
 
 }

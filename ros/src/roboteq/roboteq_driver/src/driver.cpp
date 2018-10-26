@@ -31,7 +31,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "~");
+
+  ros::CallbackQueue feedbackQueue;
+
+
+  // This node handle uses global callback queue
   ros::NodeHandle nh("~");
+  // and this one uses a custom queue
+  ros::NodeHandle feedback_nh;
+  // set custom callback queue
+  feedback_nh.setCallbackQueue(&feedbackQueue);
+
 
   std::string port = "/dev/ttyUSB0";
   int32_t baud = 115200;
@@ -56,12 +66,16 @@ int main(int argc, char **argv) {
     controller.addChannel(new roboteq::Channel(1, "~", &controller));
   } 
 
+  // Establish service
+  ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &Controller::getFeedback, &controller);
+
   // Attempt to connect and run.
   while (ros::ok()) {
     ROS_DEBUG("Attempting connection to %s at %i baud.", port.c_str(), baud);
     controller.connect();
     if (controller.connected()) {
-      ros::AsyncSpinner spinner(1);
+      // Process feedback requests on separate thread
+      ros::AsyncSpinner spinner(1, &feedbackQueue);
       spinner.start();
       while (ros::ok()) {
         controller.spinOnce();
