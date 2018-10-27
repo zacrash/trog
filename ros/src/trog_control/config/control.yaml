@@ -1,4 +1,4 @@
-trog_joint_publisher:
+strog_joint_publisher:
   type: "joint_state_controller/JointStateController"
   publish_rate: 50
 
@@ -19,7 +19,7 @@ trog_velocity_controller:
 
   # Odometry fused with IMU is published by robot_localization, so
   # no need to publish a TF based on encoders alone.
-  enable_odom_tf: false
+  enable_odom_tf: true
 
   # roboteq provides wheel velocities
   estimate_velocity_from_position: false

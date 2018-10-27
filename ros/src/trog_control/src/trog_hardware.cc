@@ -73,7 +73,6 @@ namespace trog_control
   // TODO: Read from roboteq
   void TrogHardware::updateJointsFromHardware()
   {
-
     ros::ServiceClient client = nh_.ServiceClient<roboteq_driver::Feedback>("get_feedback");
     roboteq_driver::Feedback srv;
 
