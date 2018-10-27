@@ -70,7 +70,6 @@ namespace trog_control
     right_motor_pub.publish(cmd_right);
   }
 
-  // TODO: Read from roboteq
   void TrogHardware::updateJointsFromHardware()
   {
     ros::ServiceClient client = nh_.ServiceClient<roboteq_driver::Feedback>("get_feedback");
@@ -84,21 +83,5 @@ namespace trog_control
         ROS_ERROR("Failed to call service get_feedbac with channel number: %d", channel_num);
     }
   }
-
-
-
-  // /**
-  // * Scale left and right speed outputs to maintain ros_control's desired trajectory without saturating the outputs
-  // */
-  // void TrogHardware::limitDifferentialSpeed(double &diff_speed_left, double &diff_speed_right)
-  // {
-  //   double large_speed = std::max(std::abs(diff_speed_left), std::abs(diff_speed_right));
-
-  //   if (large_speed > max_speed_)
-  //   {
-  //     diff_speed_left *= max_speed_ / large_speed;
-  //     diff_speed_right *= max_speed_ / large_speed;
-  //   }
-  // }
 
 }  // namespace trog_base
