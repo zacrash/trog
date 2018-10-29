@@ -5,16 +5,14 @@ ToDo List
 ========
 
 #### Software
-* [ ] Install AMCL and Map Server and remove folder
-* [ ] Get GPS readings
-* [ ] Implement trog_odom
+* [ ] Streamline readFromHardware() with mbs commands
 * [ ] Configure move_base parameters
-* [ ] Make URDF to be correct
+* [ ] Make URDF correct
+* [ ] Get GPS readings
+
 
 #### Hardware
-* [ ] Wire encoders
 * [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
-* [ ] Replace exisiting sprockets with D-shaft
 
 ## Milestones
 * [X] Teleoperation
