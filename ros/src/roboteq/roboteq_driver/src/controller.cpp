@@ -189,7 +189,7 @@ void Controller::processStatus(std::string str) {
 
 void Controller::processFeedback(std::string msg) {
   std::vector<std::string> fields;
-  ROS_INFO("Received feedback: %s", msg);
+  ROS_INFO("Received feedback: %s", msg.data.c_str());
   boost::split(fields, msg, boost::algorithm::is_any_of(":"));
   if (fields.size() != 11) {
     ROS_WARN("Wrong number of feedback fields. Dropping message.");

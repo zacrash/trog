@@ -29,7 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ros/callback_queue.h>
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "~");
+  ros::init(argc, argv, "driver_node");
 
   ros::CallbackQueue feedbackQueue;
 
