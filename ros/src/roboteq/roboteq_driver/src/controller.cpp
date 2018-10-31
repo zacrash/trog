@@ -250,8 +250,7 @@ bool Controller::downloadScript() {
 }
 
 
-bool Controller::getFeedback(roboteq_driver::Feedback::Request  &req,
-                                     roboteq_driver::Feedback::Response &res)
+bool Controller::getFeedback(roboteq_driver::Feedback::Request  &req, roboteq_driver::Feedback::Response &res)
 {
   int channel_num = req.channel;
   ROS_INFO("Returning feedback for %d", channel_num);

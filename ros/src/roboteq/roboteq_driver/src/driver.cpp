@@ -33,7 +33,6 @@ int main(int argc, char **argv) {
 
   ros::CallbackQueue feedbackQueue;
 
-
   // This node handle uses global callback queue
   ros::NodeHandle nh("~");
   // and this one uses a custom queue
@@ -66,7 +65,8 @@ int main(int argc, char **argv) {
   } 
 
   // Establish service
-  ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &roboteq::Controller::getFeedback, &controller);
+//  ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &roboteq::Controller::getFeedback, &controller);
+  ros::ServiceServer service = nh.advertiseService("get_feedback", &roboteq::Controller::getFeedback, &controller);
 
   // Attempt to connect and run.
   while (ros::ok()) {
