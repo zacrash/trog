@@ -1,5 +1,5 @@
 SCRIPT_VER=28
-MAX_CHANNELS=1
+MAX_CHANNELS=2
 Dim last_mode[2] as Integer
 
 ' Mode values are:
@@ -44,6 +44,7 @@ next
 
 top:
 	for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
+		print("Channel: ", ch)
 		if last_mode[ch - 1] <> getvalue(_VAR, ch) then
 			last_mode[ch - 1] = getvalue(_VAR, ch)
 

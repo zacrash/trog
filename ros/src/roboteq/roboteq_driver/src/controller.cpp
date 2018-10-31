@@ -96,6 +96,12 @@ void Controller::connect() {
 void Controller::read() {
   ROS_DEBUG_STREAM_NAMED("serial", "Bytes waiting: " << serial_->available());
   std::string msg = serial_->readline(max_line_length, eol);
+
+        ROS_DEBUG("Attempting to download MBS program.");
+        downloadScript()
+        ros::Duration(1.0).sleep();
+
+
   if (!msg.empty()) {
     ROS_DEBUG_STREAM_NAMED("serial", "RX: " << msg);
     if (msg[0] == '+' || msg[0] == '-') {
@@ -113,8 +119,8 @@ void Controller::read() {
         processFeedback(msg);
       }
     } else {
-      // Unknown other message.
-//      ROS_WARN_STREAM("Unknown serial message received: " << msg);
+      Unknown other message.
+     ROS_WARN_STREAM("Unknown serial message received: " << msg);
     }
   } else {
     ROS_WARN_NAMED("serial", "Serial::readline() returned no data.");
