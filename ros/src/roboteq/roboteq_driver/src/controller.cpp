@@ -98,7 +98,7 @@ void Controller::read() {
   std::string msg = serial_->readline(max_line_length, eol);
 
         ROS_DEBUG("Attempting to download MBS program.");
-        downloadScript()
+        downloadScript();
         ros::Duration(1.0).sleep();
 
 
