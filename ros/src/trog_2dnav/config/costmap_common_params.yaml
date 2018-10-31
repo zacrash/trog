@@ -1,8 +1,10 @@
 obstacle_range: 5.0
 raytrace_range: 6.0
 # TODO: Measaure exact numbers
+# Trog dims: 22" x 24" x 23" -> say all are 24" -> half is 0.305m
 
-footprint: [[0.25, 0.25], [-0.25, 0.25], [-0.25, -0.25], [0.25, -0.25]]
+#footprint: [[0.25, 0.25], [-0.25, 0.25], [-0.25, -0.25], [0.25, -0.25]]
+footprint: [[0.31, 0.31], [-0.31, 0.31], [-0.31, -0.31], [0.31, -0.31]]
 plugins:
   - {name: obstacles, type: "costmap_2d::ObstacleLayer"}
   - {name: inflation, type: "costmap_2d::InflationLayer"}

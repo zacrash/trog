@@ -25,9 +25,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include "roboteq_driver/controller.h"
 #include "roboteq_driver/channel.h"
-
 #include "ros/ros.h"
-
+#include <ros/callback_queue.h>
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "~");
@@ -67,7 +66,7 @@ int main(int argc, char **argv) {
   } 
 
   // Establish service
-  ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &Controller::getFeedback, &controller);
+  ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &roboteq::Controller::getFeedback, &controller);
 
   // Attempt to connect and run.
   while (ros::ok()) {

@@ -1,6 +1,7 @@
-#include "trog_control/trog_hardware.h"
 #include <boost/assign/list_of.hpp>
 #include <string>
+#include "ros/ros.h"
+#include "trog_control/trog_hardware.h"
 
 namespace
 {
@@ -75,10 +76,10 @@ namespace trog_control
     ros::ServiceClient client = nh_.ServiceClient<roboteq_driver::Feedback>("get_feedback");
     roboteq_driver::Feedback srv;
 
-    for (int channel_num = 1; channel_num <= 2; i++) {
+    for (int channel_num = 1; channel_num <= 2; channel_num++) {
       srv.request.channel = channel_num;
       if (client.call(srv))
-        joints_[i].velocity = srv.response.measuredVelocity;
+        joints_[channel_num].velocity = srv.response.measuredVelocity;
       else
         ROS_ERROR("Failed to call service get_feedbac with channel number: %d", channel_num);
     }

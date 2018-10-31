@@ -67,7 +67,7 @@ include_directories(
   )
 
 ## Declare a C++ library
-add_library(trog_hardware src/trog_hardware.cc)
+add_library(trog_hardware src/trog_hardware.cpp)
 target_link_libraries(trog_hardware ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 
@@ -79,7 +79,7 @@ target_link_libraries(trog_hardware ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(trog_control_node src/trog_control_node.cc)
+add_executable(trog_control_node src/trog_control_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
