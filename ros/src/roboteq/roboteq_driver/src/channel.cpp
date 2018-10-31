@@ -36,7 +36,7 @@ namespace roboteq {
 
 Channel::Channel(int channel_num, std::string ns, Controller* controller) :
   channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(3500),
-  last_mode_(255)
+  last_mode_(255), _measured_velocity(-1.0)
 {
   sub_cmd_ = nh_.subscribe("cmd", 1, &Channel::cmdCallback, this);
   pub_feedback_ = nh_.advertise<roboteq_msgs::Feedback>("feedback", 1);

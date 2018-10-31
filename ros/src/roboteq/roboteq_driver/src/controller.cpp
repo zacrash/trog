@@ -253,14 +253,16 @@ bool Controller::downloadScript() {
 bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_driver::Feedback::Response &res)
 { 
   int channel_num = req.channel;
-  ROS_INFO("Channel size: %d", channels_.size());
 
-  if (channel_num >= 1 && channel_num <= channels_.size()) {
-    res.measuredVelocity = channels_[req.channel]->getMeasuredVelocity();
-  } else {
-    ROS_WARN("Bad channel number. Dropping message.");
-    return false;
-  }
+
+     if (channel_num >= 1 && channel_num <= channels_.size()) {
+       res.measuredVelocity = channels_[req.channel-1]->getMeasuredVelocity();
+     }
+     //else {
+    //   ROS_WARN("Bad channel number. Dropping message.");
+    //   return false;
+    // }
+     ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
    return true;
 }
 
