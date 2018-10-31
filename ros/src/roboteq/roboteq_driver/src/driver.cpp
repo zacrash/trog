@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
   feedback_nh.setCallbackQueue(&feedbackQueue);
 
 
-  std::string port = "/dev/ttyUSB0";
+  std::string port = "/dev/ttyACM0";
   int32_t baud = 115200;
   nh.param<std::string>("port", port, port);
   nh.param<int32_t>("baud", baud, baud);
