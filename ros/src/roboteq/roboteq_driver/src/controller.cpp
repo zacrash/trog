@@ -250,18 +250,20 @@ bool Controller::downloadScript() {
 }
 
 
-bool Controller::getFeedback(roboteq_driver::Feedback::Request  &req, roboteq_driver::Feedback::Response &res)
+bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_driver::Feedback::Response &res)
 {
-  int channel_num = req.channel;
-  ROS_INFO("Returning feedback for %d", channel_num);
-
-  if (channel_num >= 1 && channel_num <= channels_.size()) {
-    res.measuredVelocity = channels_[req.channel]->getMeasuredVelocity();
-  } else {
-    ROS_WARN("Bad channel number. Dropping message.");
-    return false;
-  }
+  res.measuredVelocity = 0.0
   return true;
+  // int channel_num = req.channel;
+  // ROS_INFO("Returning feedback for %d", channel_num);
+
+  // if (channel_num >= 1 && channel_num <= channels_.size()) {
+  //   res.measuredVelocity = channels_[req.channel]->getMeasuredVelocity();
+  // } else {
+  //   ROS_WARN("Bad channel number. Dropping message.");
+  //   return false;
+  // }
+  // return true;
 }
 
 }  // namespace roboteq
