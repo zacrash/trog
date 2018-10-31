@@ -44,7 +44,6 @@ next
 
 top:
 	for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
-		print("Channel: ", ch)
 		if last_mode[ch - 1] <> getvalue(_VAR, ch) then
 			last_mode[ch - 1] = getvalue(_VAR, ch)
 
