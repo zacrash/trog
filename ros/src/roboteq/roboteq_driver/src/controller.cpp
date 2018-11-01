@@ -97,12 +97,7 @@ void Controller::read() {
   ROS_DEBUG_STREAM_NAMED("serial", "Bytes waiting: " << serial_->available());
   std::string msg = serial_->readline(max_line_length, eol);
 
-        ROS_DEBUG("Attempting to download MBS program.");
-        downloadScript();
-        ros::Duration(1.0).sleep();
-
-
-  if (!msg.empty()) {
+    if (!msg.empty()) {
     ROS_DEBUG_STREAM_NAMED("serial", "RX: " << msg);
     if (msg[0] == '+' || msg[0] == '-') {
       // Notify the ROS thread that a message response (ack/nack) has arrived.
@@ -119,11 +114,12 @@ void Controller::read() {
         processFeedback(msg);
       }
     } else {
-      Unknown other message.
+      //Unknown other message.
      ROS_WARN_STREAM("Unknown serial message received: " << msg);
     }
   } else {
-    ROS_WARN_NAMED("serial", "Serial::readline() returned no data.");
+  
+      ROS_WARN_NAMED("serial", "Serial::readline() returned no data.");
     if (!receiving_script_messages_) {
       if (start_script_attempts_ < 5) {
         start_script_attempts_++;
@@ -137,10 +133,11 @@ void Controller::read() {
         }
         ros::Duration(1.0).sleep();
       }
-    } else {
+          }
+    else {
       ROS_DEBUG("Script is believed to be in-place and running, so taking no action.");
     }
-  }
+    }
 }
 
 void Controller::write(std::string msg) {
@@ -195,7 +192,7 @@ void Controller::processStatus(std::string str) {
 
 void Controller::processFeedback(std::string msg) {
   std::vector<std::string> fields;
-  ROS_INFO("Received feedback: %s", msg.c_str());
+
   boost::split(fields, msg, boost::algorithm::is_any_of(":"));
   if (fields.size() != 11) {
     ROS_WARN("Wrong number of feedback fields. Dropping message.");
@@ -265,11 +262,11 @@ bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_dri
      if (channel_num >= 1 && channel_num <= channels_.size()) {
        res.measuredVelocity = channels_[req.channel-1]->getMeasuredVelocity();
      }
-     //else {
-    //   ROS_WARN("Bad channel number. Dropping message.");
-    //   return false;
-    // }
-     ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
+     else {
+       ROS_WARN("Bad channel number. Dropping message.");
+       return false;
+     }
+     // ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
    return true;
 }
 
