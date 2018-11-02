@@ -46,14 +46,6 @@ Channel::Channel(int channel_num, std::string ns, Controller* controller) :
   timeout_timer_.stop();
 }
 
-  int Channel::debug_helper(double setpoint)
-  {
-    if(channel_num_ % 2)
-      return setpoint > 0 ? 400 : -400;
-
-    return setpoint > 0 ? -400 : 400;
-  }
-
 void Channel::cmdCallback(const roboteq_msgs::Command& command)
 {
   // Reset command timeout.

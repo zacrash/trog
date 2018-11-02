@@ -46,7 +46,6 @@ class Channel
     double getMeasuredVelocity() { return _measured_velocity;}
 
   protected:
-    int debug_helper(double setpoint);
     /**
      * @param x Angular velocity in radians/s.
      * @return Angular velocity in RPM.
@@ -65,30 +64,6 @@ class Channel
       return x * (2 * M_PI) / 60;
     }
 
-    /**
-     * Conversion of radians to encoder ticks. Note that this assumes a
-     * 1024-line quadrature encoder (hence 4096).
-     *
-     * @param x Angular position in radians.
-     * @return Angular position in encoder ticks.
-     */
-    static double to_encoder_ticks(double x)
-    {
-      return x * 4096 / (2 * M_PI);
-    }
-
-    /**
-     * Conversion of encoder ticks to radians. Note that this assumes a
-     * 1024-line quadrature encoder (hence 4096).
-     *
-     * @param x Angular position in encoder ticks.
-     * @return Angular position in radians.
-     */
-    static double from_encoder_ticks(double x)
-    {
-      return x * (2 * M_PI) / 4096;
-    }
-
     void cmdCallback(const roboteq_msgs::Command&);
     void timeoutCallback(const ros::TimerEvent&);
 
@@ -102,7 +77,6 @@ class Channel
     ros::Timer timeout_timer_;
 
     ros::Time last_feedback_time_;
-    uint8_t last_mode_;
 
     //Control
     double _measured_velocity;
