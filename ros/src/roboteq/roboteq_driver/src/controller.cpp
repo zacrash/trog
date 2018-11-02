@@ -208,7 +208,7 @@ void Controller::processFeedback(std::string msg) {
   if (channel_num >= 1 && channel_num <= channels_.size()) {
     channels_[channel_num - 1]->feedbackCallback(fields);
   } else {
-    ROS_WARN("Bad channel number. Dropping message.");
+    ROS_WARN("Bad channel number %d. Dropping message.", channel_num);
     return;
   }
 }
