@@ -265,7 +265,8 @@ bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_dri
        ROS_WARN("Bad channel number. Dropping message.");
        return false;
      }
-    ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
+      if (res.measuredVelocity  != 0)
+        ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
     return true;
 }
 
