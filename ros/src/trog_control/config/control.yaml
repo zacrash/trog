@@ -1,4 +1,4 @@
-strog_joint_publisher:
+trog_joint_publisher:
   type: "joint_state_controller/JointStateController"
   publish_rate: 50
 
