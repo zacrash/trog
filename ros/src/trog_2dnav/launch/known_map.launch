@@ -2,12 +2,7 @@
     <!-- Make sure to call rosservice call move_base/global_localization -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find trog_mapping)/maps/lab_map.yaml"/>
 
-    <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0.0 0.0 0.0 0 0.0 0.0 /map /world 40" /> 
-
     <include file="$(find trog_sensors)/launch/sensors.launch"/>
-
-    <!-- Provides odometery from laser scans -->
-    <include file="$(find laser_scan_matcher)/launch/laser_odom.launch"/>
 
     <!-- Localization -->
     <include file="$(find amcl)/examples/amcl_diff.launch"/>
@@ -21,4 +16,11 @@
         <rosparam file="$(find trog_2dnav)/config/base_local_planner_params.yaml" command="load" />
     </node> -->
 
+</launch>
+<launch>
+    <!-- Provide map -->
+    <arg name="map_name" default="my_map" />
+    <node pkg="map_server" type="map_server" name="map_server" args="-f $(find trog_mapping)/maps/$(arg map_name).yaml">
+
+    <!-- Run localization -->
 </launch>

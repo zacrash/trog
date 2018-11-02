@@ -1,9 +1,0 @@
-<launch>
-  <include file="$(find hector_mapping)/launch/mapping_default.launch">
-    <param name="odom_frame" value="base_footprint"/>
-  </include>
-
-  <node pkg="tf" type="static_transform_publisher" name="odom_to_base" args="0.0 0.0 0.0 0 0.0 0.0 /scanmatcher_frame /base_footprint  50" /> 
-  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.2 0.0 0.4 0 0.0 0.0 /base_footprint /laser 50" />
-
-</launch>
