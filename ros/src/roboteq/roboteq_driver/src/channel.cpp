@@ -64,8 +64,7 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
   // Update mode of motor driver. We send this on each command for redundancy against a
   // lost message, and the MBS script keeps track of changes and updates the control
   // constants accordingly.
-  controller_->command << "VAR" << channel_num_ << static_cast<int>(command.mode) << controller_->send;
-
+//  controller_->command << "VAR" << channel_num_ << static_cast<int>(command.mode) << controller_->send;
   if (command.mode == roboteq_msgs::Command::MODE_VELOCITY)
   {
     // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
