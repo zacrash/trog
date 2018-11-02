@@ -5,6 +5,7 @@ ToDo List
 ========
 
 #### Software
+* [ ] Converting setpoints to velocities. Measure and calibrate.
 * [ ] Configure move_base parameters
 * [ ] Make URDF correct
 * [ ] Get GPS readings

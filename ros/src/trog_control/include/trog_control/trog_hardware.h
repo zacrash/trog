@@ -32,6 +32,9 @@ namespace trog_control
 
       void registerControlInterfaces();
 
+      float rpm_to_radians(int rpms);
+
+
       //void limitDifferentialSpeed(double &travel_speed_left, double &travel_speed_right);
 
       ros::NodeHandle nh_, private_nh_;

@@ -7,6 +7,8 @@ namespace
 {
   const uint8_t LEFT = 0, RIGHT = 1;
   const double WHEEL_DIAMETER = 0.254;
+  const double PI  =3.141592653589793238463;
+
 };
 
 namespace trog_control
@@ -34,36 +36,31 @@ namespace trog_control
     for (unsigned int i = 0; i < joint_names.size(); i++)
     {
       hardware_interface::JointStateHandle joint_state_handle(joint_names[i],
-                                                              &joints_[i].position, &joints_[i].velocity,
+                                                              &joints_[i].position, 
+                                                              &joints_[i].velocity,
                                                               &joints_[i].effort);
       joint_state_interface_.registerHandle(joint_state_handle);
 
-      hardware_interface::JointHandle joint_handle(
-        joint_state_handle, &joints_[i].velocity_command);
+      hardware_interface::JointHandle joint_handle(joint_state_handle, &joints_[i].velocity_command);
       velocity_joint_interface_.registerHandle(joint_handle);
     }
     registerInterface(&joint_state_interface_);
     registerInterface(&velocity_joint_interface_);
   }
 
-    /**
-  * Get latest velocity commands from ros_control via joint structure, and send to MCU
-  */
+  /**
+   *  Get latest velocity commands from ros_control via joint structure, and send to MCU
+   */
   void TrogHardware::writeCommandsToHardware()
   {
     double diff_speed_left = joints_[LEFT].velocity_command;
     double diff_speed_right = joints_[RIGHT].velocity_command;
 
-    // TODO: Figure out how useful this is
-    // limitDifferentialSpeed(diff_speed_left, diff_speed_right);
-
     // Set up messages
     roboteq_msgs::Command cmd_left;
-    cmd_left.mode = cmd_left.MODE_VELOCITY;
     cmd_left.setpoint = diff_speed_left;
 
     roboteq_msgs::Command cmd_right;
-    cmd_right.mode = cmd_right.MODE_VELOCITY;
     cmd_right.setpoint = diff_speed_right;
 
     //Publish
@@ -71,6 +68,9 @@ namespace trog_control
     right_motor_pub.publish(cmd_right);
   }
 
+  /**
+   *  Pull latest speed and travel measurements from MCU, and store in joint structure for ros_control
+   */
   void TrogHardware::updateJointsFromHardware()
   {
     ros::ServiceClient client = nh_.serviceClient<roboteq_driver::Feedback>("get_feedback");

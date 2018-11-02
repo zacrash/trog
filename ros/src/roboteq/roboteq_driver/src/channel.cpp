@@ -31,12 +31,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "roboteq_msgs/Command.h"
 
 
-
 namespace roboteq {
 
 Channel::Channel(int channel_num, std::string ns, Controller* controller) :
   channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(3500),
-  last_mode_(255), _measured_velocity(-1.0)
+   _measured_velocity(-1.0)
 {
   sub_cmd_ = nh_.subscribe("cmd", 1, &Channel::cmdCallback, this);
   pub_feedback_ = nh_.advertise<roboteq_msgs::Feedback>("feedback", 1);
@@ -61,39 +60,18 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
   timeout_timer_.stop();
   timeout_timer_.start();
 
-  // Update mode of motor driver. We send this on each command for redundancy against a
-  // lost message, and the MBS script keeps track of changes and updates the control
-  // constants accordingly.
-//  controller_->command << "VAR" << channel_num_ << static_cast<int>(command.mode) << controller_->send;
-  if (command.mode == roboteq_msgs::Command::MODE_VELOCITY)
-  {
-    // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
-    // TODO: Uncomment when we have full battery power
-    //int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; 
-    int roboteq_velocity = (command.setpoint * 150);
+  // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
+  // TODO: Uncomment when we have full battery power
+  //int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; 
+  int roboteq_velocity = (command.setpoint * 150);
 
-    //TODO: CHANGE ----> I Fucked up the wiring... -.-
-    if(channel_num_ == 1) roboteq_velocity *= -1;
-    
-    // Write mode and command to the motor driver.
-    controller_->command << "G" << channel_num_ << roboteq_velocity << controller_->send;
-  }
-  else if (command.mode == roboteq_msgs::Command::MODE_POSITION)
-  {
-    // Convert the commanded position in rads to encoder ticks.
-    int roboteq_position = to_encoder_ticks(command.setpoint);
-    ROS_DEBUG_STREAM("Commanding " << roboteq_position << " position to motor driver.");
-
-    // Write command to the motor driver.
-    controller_->command << "P" << channel_num_ << roboteq_position << controller_->send;
-  }
-  else
-  {
-    ROS_WARN_STREAM("Command received with unknown mode number, dropping.");
-  }
+  //TODO: CHANGE ----> I Fucked up the wiring... -.-
+  if(channel_num_ == 1) roboteq_velocity *= -1;
+  
+  // Write mode and command to the motor driver.
+  controller_->command << "G" << channel_num_ << roboteq_velocity << controller_->send;
 
   controller_->flush();
-  last_mode_ = command.mode;
 }
 
 void Channel::timeoutCallback(const ros::TimerEvent&)
