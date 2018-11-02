@@ -74,7 +74,9 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
 
     //TODO: CHANGE ----> I Fucked up the wiring... -.-
     if(channel_num_ == 1) roboteq_velocity *= -1;
-
+    
+    // Write mode and command to the motor driver.
+    controller_->command << "G" << channel_num_ << roboteq_velocity << controller_->send;
   }
   else if (command.mode == roboteq_msgs::Command::MODE_POSITION)
   {

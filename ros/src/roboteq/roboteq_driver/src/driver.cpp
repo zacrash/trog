@@ -84,6 +84,7 @@ int main(int argc, char **argv) {
       }
       fb_spinner.stop();
       global_spinner.stop();
+      
     } else {
       ROS_DEBUG("Problem connecting to serial device.");
       ROS_ERROR_STREAM_ONCE("Problem connecting to port " << port << ". Trying again every 1 second.");
