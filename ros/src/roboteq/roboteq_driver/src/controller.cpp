@@ -258,7 +258,6 @@ bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_dri
 { 
   int channel_num = req.channel;
 
-
      if (channel_num >= 1 && channel_num <= channels_.size()) {
        res.measuredVelocity = channels_[req.channel-1]->getMeasuredVelocity();
      }
@@ -266,8 +265,8 @@ bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_dri
        ROS_WARN("Bad channel number. Dropping message.");
        return false;
      }
-     // ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
-   return true;
+    ROS_INFO("Feedback for Channel %d: %.2f", channel_num, res.measuredVelocity);
+    return true;
 }
 
 }  // namespace roboteq
