@@ -5,7 +5,6 @@ ToDo List
 ========
 
 #### Software
-* [ ] Streamline readFromHardware() with mbs commands
 * [ ] Configure move_base parameters
 * [ ] Make URDF correct
 * [ ] Get GPS readings
