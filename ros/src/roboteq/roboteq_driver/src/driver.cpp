@@ -67,18 +67,23 @@ int main(int argc, char **argv) {
   // Establish service
   ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &roboteq::Controller::getFeedback, &controller);
 
-  // Attempt to connect and run.
+  // Attempt to connect and rn.
   while (ros::ok()) {
     ROS_DEBUG("Attempting connection to %s at %i baud.", port.c_str(), baud);
     controller.connect();
     if (controller.connected()) {
       // Process feedback requests on separate thread
-      ros::AsyncSpinner spinner(1, &feedbackQueue);
-      spinner.start();
+      ros::AsyncSpinner fb_spinner(1, &feedbackQueue);
+      ros::AsyncSpinner global_spinner(1);
+
+      fb_spinner.start();
+      global_spinner.start();
+
       while (ros::ok()) {
         controller.spinOnce();
       }
-      spinner.stop();
+      fb_spinner.stop();
+      global_spinner.stop();
     } else {
       ROS_DEBUG("Problem connecting to serial device.");
       ROS_ERROR_STREAM_ONCE("Problem connecting to port " << port << ". Trying again every 1 second.");
