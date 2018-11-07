@@ -21,10 +21,12 @@ Draw lines between actors and use cases
 ### Structural
 
 #### Adaptor
-     The Adapter Pattern converts the interface of a class into another interface the clients expect. Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.
+     The Adapter Pattern converts the interface of a class into another interface the clients expect. 
+     Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.
 
 #### Facade
-    The Façade Pattern provides a unified interface to a set of interfaces in a subsystem. Façade defines a higher-level interface that makes the subsystem easier to use.
+    The Façade Pattern provides a unified interface to a set of interfaces in a subsystem. 
+    Façade defines a higher-level interface that makes the subsystem easier to use.
 
 #### Flyweight
     The Flyweight Pattern allows one instance of a class can be reused to provide many virtual instances.
@@ -41,7 +43,8 @@ Draw lines between actors and use cases
 ### Creational
 
 ### Abstract factory
-    The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes.
+    The Abstract Factory Pattern provides an interface for creating families of related or dependent objects 
+    without specifying their concrete classes.
 
 Hence the word *interface*.
    
@@ -62,7 +65,8 @@ Cons
     }
 ~~~
 #### Factory 
-    The Factory Method Pattern defines an interface for creating an object but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses
+    The Factory Method Pattern defines an interface for creating an object but lets subclasses decide which 
+    class to instantiate. Factory Method lets a class defer instantiation to subclasses
 
 "Factory Method lets a class defer instantiation to subclasses"
 - In the case of the `PizzaStore`, `createPizza()`in each subclass handles instantiation
@@ -72,36 +76,45 @@ Pattern uses **inheritance** and relies on subclass to another desired object in
 
 
 #### Singleton
-    The Singleton Pattern ensures a class has only one instance and provides a global point of access to that instance.
+    The Singleton Pattern ensures a class has only one instance and provides a global point of access to 
+    that instance.
 
 ### Beahavioral
 
 #### Template
-    The Template Method Pattern defines the skeleton of an algorithm in a method, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm’s structure.
+    The Template Method Pattern defines the skeleton of an algorithm in a method, deferring some steps to 
+    subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing 
+    the algorithm’s structure.
 
 Look for 1+ abstract method that subclasses need to implement. 
 
-
 #### Command
-    The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.
+    The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects 
+    with different requests, queue or log requests, and support undoable operations.
 
 #### Observer
-    The Observer Pattern defines a one-to- many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically.
+    The Observer Pattern defines a one-to- many dependency between objects so that when one object changes 
+    state, all of its dependents are notified and updated automatically.
 
 #### Stategy
-    The Strategy Pattern defines a family of algorithms, Encapsulates each one, and makes them interchangeable at runtime. Strategy lets the algorithm vary independently from clients that use it.
+    The Strategy Pattern defines a family of algorithms, Encapsulates each one, and makes them interchangeable 
+    at runtime. Strategy lets the algorithm vary independently from clients that use it.
 
 Usually associated with a behavior. `setBehavior()` is indication. 
 
 #### State
-    The State Pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
+    The State Pattern allows an object to alter its behavior when its internal state changes. The object will 
+    appear to change its class.
+    
 Class for each state. 
 - State interface will have every possible transition?
 - Each state needs to implement every transition (I think)
 An additional context state.
 
 #### Mediator
-    Define an object that encapsulates how a set of objects interact. Promotes loose coupling by keeping objects from referring to each other explicitly and it lets you vary their interactions independently. Encapsulates many to many dependencies between objects
+    Define an object that encapsulates how a set of objects interact. Promotes loose coupling by keeping 
+    objects from referring to each other explicitly and it lets you vary their interactions independently.
+    Encapsulates many to many dependencies between objects
 
 **Pros**
 - Communication logic is simple
@@ -112,7 +125,8 @@ An additional context state.
 
 
 ### Composition
-Composition is more flexible because to change behavior you simply set the field. Opposite would be subclassing. Not flexible because behaviors cannot be modified within objects. 
+Composition is more flexible because to change behavior you simply set the field. Opposite would be subclassing. 
+Not flexible because behaviors cannot be modified within objects. 
 
 
 ## Bad Code Smells
