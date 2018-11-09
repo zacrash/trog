@@ -1,6 +1,6 @@
 <launch>
 
-      <include file="$(find trog_description)/launch/description.launch" />
+      <!-- <include file="$(find trog_description)/launch/description.launch" /> -->
 
       <!-- Load controller configuration -->
       <rosparam command="load" file="$(find trog_control)/config/control.yaml" />

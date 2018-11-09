@@ -15,7 +15,7 @@ trog_velocity_controller:
   velocity_rolling_window_size: 2
 
   wheel_radius: 0.254
-  wheel_seperation: 0.3302
+  wheel_seperation: 0.4826
 
   # Base frame_id
   base_frame_id: base_link
