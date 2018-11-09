@@ -23,4 +23,5 @@
     <node pkg="map_server" type="map_server" name="map_server" args="-f $(find trog_mapping)/maps/$(arg map_name).yaml">
 
     <!-- Run localization -->
+    <include file="$(find amcl)/examples/amcl_diff.launch">
 </launch>
