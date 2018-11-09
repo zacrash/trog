@@ -43,7 +43,7 @@ class Channel
     void feedbackCallback(std::vector<std::string>);
 
     // Used to conform to ROS Control interface
-    double getMeasuredVelocity() { return _measured_velocity;}
+    double getMeasuredPosition() { return _measured_position;}
 
   protected:
     /**
@@ -66,7 +66,7 @@ class Channel
 
     static double from_encoder_ticks(double x)
     {
-      return x * (2 * M_PI) / 4096;
+      return x * (2 * M_PI) / 1750;
     }
     
     void cmdCallback(const roboteq_msgs::Command&);
@@ -84,7 +84,7 @@ class Channel
     ros::Time last_feedback_time_;
 
     //Control
-    double _measured_velocity;
+    double _measured_position;
 };
 
 }

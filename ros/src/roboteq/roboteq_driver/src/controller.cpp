@@ -235,7 +235,7 @@ bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_dri
   int channel_num = req.channel;
 
      if (channel_num >= 1 && channel_num <= channels_.size()) {
-       res.measuredVelocity = channels_[req.channel-1]->getMeasuredVelocity();
+       res.measuredPosition = channels_[req.channel-1]->getMeasuredPosition();
      }
      else {
        ROS_WARN("Bad channel number. Dropping message.");

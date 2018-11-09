@@ -35,7 +35,7 @@ namespace roboteq {
 
 Channel::Channel(int channel_num, std::string ns, Controller* controller) :
   channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(3500),
-   _measured_velocity(0.0)
+   _measured_position(0.0)
 {
   sub_cmd_ = nh_.subscribe("cmd", 1, &Channel::cmdCallback, this);
   pub_feedback_ = nh_.advertise<roboteq_msgs::Feedback>("feedback", 1);
@@ -103,7 +103,7 @@ void Channel::feedbackCallback(std::vector<std::string> fields)
   }
 
   // Set control values
-  _measured_velocity = msg.measured_velocity;
+  _measured_position = msg.measuredPosition;
 
   pub_feedback_.publish(msg);
 }
