@@ -21,7 +21,7 @@ trog_velocity_controller:
   base_frame_id: base_link
   odom_frame_id: odom
 
-  enable_odom_tf: true
+  enable_odom_tf: false
 
   # roboteq provides wheel velocities
   estimate_velocity_from_position: false
