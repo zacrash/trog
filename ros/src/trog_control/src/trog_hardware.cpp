@@ -79,7 +79,7 @@ namespace trog_control
     for (int channel_num = 1; channel_num <= 2; channel_num++) {
       srv.request.channel = channel_num;
       if (client.call(srv))
-        joints_[channel_num].velocity = srv.response.measuredVelocity;
+        joints_[channel_num-1].velocity = srv.response.measuredVelocity;
       else
         ROS_ERROR("Failed to call service get_feedback with channel number: %d", channel_num);
     }

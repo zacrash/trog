@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
   trog_control::TrogHardware trog(nh, private_nh);
   controller_manager::ControllerManager cm(&trog, nh);
 
-
   // Setup separate queue and single-threaded spinner to process timer callbacks
   // that interface with Husky hardware - libhorizon_legacy not threadsafe. This
   // avoids having to lock around hardware access, but precludes realtime safety
