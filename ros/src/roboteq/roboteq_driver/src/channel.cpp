@@ -103,7 +103,7 @@ void Channel::feedbackCallback(std::vector<std::string> fields)
   }
 
   // Set control values
-  _measured_position = msg.measuredPosition;
+  _measured_position = msg.measured_position;
 
   pub_feedback_.publish(msg);
 }
