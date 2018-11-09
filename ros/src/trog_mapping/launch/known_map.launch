@@ -3,9 +3,6 @@
     <arg name="map_name" default="my_map" />
     <node pkg="map_server" type="map_server" name="map_server" args="$(find trog_mapping)/maps/$(arg map_name).yaml"/>
 
-    <!-- Run localization -->
     <!-- Localization -->
-    <include file="$(find amcl)/examples/amcl_diff.launch">
-      <param name="odom_frame_id" value="/trog_velocity_controller/odom"/>
-    </include>
+    <include file="$(find trog_mapping)/launch/amcl_diff.launch"/>
 </launch>
