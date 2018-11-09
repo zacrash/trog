@@ -1,6 +1,6 @@
 <launch>
-    <arg name="create_map" default="False"/>
-    <arg name="move_base" default="False"/>
+    <arg name="create_map" default="false"/>
+    <arg name="move_base" default="false"/>
 
     <!-- Start control nodes -->
     <include file="$(find trog_control)/launch/control.launch"/>
@@ -9,9 +9,9 @@
     <include file="$(find trog_sensors)/launch/sensors.launch"/>
 
     <!-- Create or Load Map -->
-    <include file="$(find trog_mapping)/launch/slam.launch" if="$(eval create_map == 'True')"/>
-    <include file="$(find trog_mapping)/launch/known_map.launch" if="$(eval create_map == 'False')"/>
+    <include file="$(find trog_mapping)/launch/slam.launch" if="$(arg create_map)"/>
+    <include file="$(find trog_mapping)/launch/known_map.launch" unless="$(arg create_map)"/>
 
     <!-- Move Base -->
-    <include file="$(find trog_2dnav)/launch/move_base.launch" if="$(eval move_base == 'True')"/>
+    <include file="$(find trog_2dnav)/launch/move_base.launch" if="$(arg move_base)"/>
 </launch>
