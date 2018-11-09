@@ -32,6 +32,6 @@
       <param name="llsamplestep" value="0.01"/>
       <param name="lasamplerange" value="0.005"/>
       <param name="lasamplestep" value="0.005"/>
-      <param name="odom_frame" value="/trog_velocity_controller/odom"/>
+      <!-- <param name="odom_frame" value="/trog_velocity_controller/odom"/> -->
     </node>    
 </launch>
