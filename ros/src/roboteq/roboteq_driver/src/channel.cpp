@@ -80,7 +80,7 @@ void Channel::feedbackCallback(std::vector<std::string> fields)
   roboteq_msgs::Feedback msg;
   msg.header.stamp = last_feedback_time_ = ros::Time::now();
 
-  ROS_INFO("%s", fields[6].c_str());
+  ROS_INFO("%s : %s", fields[1], fields[6].c_str());
 
   // Scale factors as outlined in the relevant portions of the user manual, please
   // see mbs/script.mbs for URL and specific page references.
