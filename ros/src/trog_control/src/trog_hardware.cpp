@@ -82,7 +82,7 @@ namespace trog_control
       srv.request.channel = channel_num;
       if (client.call(srv))
       {
-        mp =  srv.response.measuredPosition;
+        float mp =  srv.response.measuredPosition;
         joints_[channel_num-1].position = channel_num == 1 ? mp : -mp;
       }
       else
