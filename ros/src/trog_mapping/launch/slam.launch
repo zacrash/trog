@@ -2,7 +2,6 @@
 <!-- Takes in argument: map_name -->
 <launch>
     <!-- Make map -->
-    <param name="use_sim_time" value="false"/>
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
       <remap from="scan" to="base_scan"/>
       <param name="map_update_interval" value="5.0"/>
@@ -19,8 +18,8 @@
       <param name="srt" value="0.2"/>
       <param name="str" value="0.1"/>
       <param name="stt" value="0.2"/>
-      <param name="linearUpdate" value="0.0"/>
-      <param name="angularUpdate" value="0.0"/>
+      <param name="linearUpdate" value="1.0"/>
+      <param name="angularUpdate" value="0.5"/>
       <param name="temporalUpdate" value="3.0"/>
       <param name="resampleThreshold" value="0.5"/>
       <param name="particles" value="30"/>
