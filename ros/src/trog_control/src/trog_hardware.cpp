@@ -83,7 +83,7 @@ namespace trog_control
       if (client.call(srv))
       {
         mp =  srv.response.measuredPosition;
-        joints_[channel_num-1].position = mchannel_nump == 1 ? mp : -mp;
+        joints_[channel_num-1].position = channel_num == 1 ? mp : -mp;
       }
       else
         ROS_ERROR("Failed to call service get_feedback with channel number: %d", channel_num);
