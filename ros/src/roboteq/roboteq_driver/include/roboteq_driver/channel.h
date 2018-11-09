@@ -64,6 +64,11 @@ class Channel
       return x * (2 * M_PI) / 60;
     }
 
+    static double from_encoder_ticks(double x)
+    {
+      return x * (2 * M_PI) / 4096;
+    }
+    
     void cmdCallback(const roboteq_msgs::Command&);
     void timeoutCallback(const ros::TimerEvent&);
 
