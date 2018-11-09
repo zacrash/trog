@@ -3,7 +3,6 @@
 <launch>
     <!-- Make map -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-      <remap from="scan" to="base_scan"/>
       <param name="map_update_interval" value="5.0"/>
       <param name="maxUrange" value="16.0"/>
       <param name="sigma" value="0.05"/>
