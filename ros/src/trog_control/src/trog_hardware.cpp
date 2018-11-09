@@ -3,6 +3,8 @@
 #include "trog_control/trog_hardware.h"
 #include <ros/ros.h>
 
+#include "roboteq_msgs/Command.h"
+
 namespace
 {
   const uint8_t LEFT = 0, RIGHT = 1;
