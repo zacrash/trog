@@ -66,7 +66,7 @@ class Channel
 
     static double from_encoder_ticks(double x)
     {
-      return x * (2 * M_PI) / 1750;
+      return x * (2 * M_PI) / 8729;
     }
     
     void cmdCallback(const roboteq_msgs::Command&);
