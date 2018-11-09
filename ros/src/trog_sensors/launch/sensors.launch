@@ -1,5 +1,7 @@
 <launch>
     <!-- Velodyne VLP-16 LiDAR -->
+    <!-- Static transform -->
+    <node pkg="tf" type="static_transform_publisher" name="laser" args="0 0 0 0.2 0 0.6 1  /base_link /laser  100"/>
     <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
       <param name="frame_id " value="laser"/>
     </include>

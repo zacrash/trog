@@ -1,6 +1,5 @@
 <!-- Makes and saves map. -->
 <!-- Takes in argument: map_name -->
-
 <launch>
     <!-- Make map -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
@@ -10,5 +9,5 @@
     
     <!-- Save map -->
     <arg name="map_name" default="my_map" />
-    <node pkg="map_server" type="map_saver" name="map_saver" args="-f $(find trog_mapping)/maps/$(arg map_name)">
+    <node pkg="map_server" type="map_saver" name="map_saver" args="-f $(find trog_mapping)/maps/$(arg map_name)"/>
 </launch>
