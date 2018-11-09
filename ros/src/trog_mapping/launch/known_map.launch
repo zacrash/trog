@@ -1,27 +1,11 @@
 <launch>
-    <!-- Make sure to call rosservice call move_base/global_localization -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find trog_mapping)/maps/lab_map.yaml"/>
-
-    <include file="$(find trog_sensors)/launch/sensors.launch"/>
-
-    <!-- Localization -->
-    <include file="$(find amcl)/examples/amcl_diff.launch"/>
-
-     <!-- Move base for 2d navigation -->
-    <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <rosparam file="$(find trog_2dnav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-        <rosparam file="$(find trog_2dnav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find trog_2dnav)/config/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find trog_2dnav)/config/global_costmap_params.yaml" command="load" />
-        <rosparam file="$(find trog_2dnav)/config/base_local_planner_params.yaml" command="load" />
-    </node> -->
-
-</launch>
-<launch>
     <!-- Provide map -->
     <arg name="map_name" default="my_map" />
     <node pkg="map_server" type="map_server" name="map_server" args="-f $(find trog_mapping)/maps/$(arg map_name).yaml">
 
     <!-- Run localization -->
+    <!-- Localization -->
     <include file="$(find amcl)/examples/amcl_diff.launch">
+      <param name="odom_frame_id" value="/trog_velocity_controller/odom"/>
+    </include>
 </launch>
