@@ -14,6 +14,9 @@ trog_velocity_controller:
   cmd_vel_timeout: 0.25
   velocity_rolling_window_size: 2
 
+  wheel_radius: 0.254
+  wheel_seperation: 0.3302
+
   # Base frame_id
   base_frame_id: base_link
 
