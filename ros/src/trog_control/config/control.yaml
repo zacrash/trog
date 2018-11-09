@@ -14,6 +14,9 @@ trog_velocity_controller:
   cmd_vel_timeout: 0.25
   velocity_rolling_window_size: 2
 
+  wheel_radius: 0.254
+  wheel_seperation: 0.3302
+
   # Base frame_id
   base_frame_id: base_link
 
@@ -23,7 +26,7 @@ trog_velocity_controller:
   estimate_velocity_from_position: false
 
   # Wheel separation and radius multipliers
-  wheel_separation_multiplier: 1.875 # default: 1.0
+  wheel_separation_multiplier: 1.0 # default: 1.0
   wheel_radius_multiplier    : 1.0 # default: 1.0
 
   # Velocity and acceleration limits
