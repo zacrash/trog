@@ -8,6 +8,8 @@ This branch implements new features on Trog. Currently we are developing...
 
 ToDo List
 ========
+#### Miscellaneous
+* Document various tasks
 
 #### Software
 * [ ] Speed up control node response time
