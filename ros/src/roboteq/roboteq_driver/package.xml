@@ -1,10 +1,10 @@
-<?xml version="1.0"?>
+<?xml version="2.0"?>
 <package>
   <name>roboteq_driver</name>
   <version>0.2.0</version>
   <description>The roboteq_driver package</description>
 
-  <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
+  <maintainer email="bsquicciarini@ucla.edu">Brad Squicciarini</maintainer>
 
   <license>BSD</license>
 
@@ -15,7 +15,6 @@
   <run_depend>roboteq_msgs</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>serial</run_depend>
-
-  <export>
-  </export>
+  <build_depend>message_generation</build_depend>
+  <run_depend>message_runtime</run_depend>
 </package>

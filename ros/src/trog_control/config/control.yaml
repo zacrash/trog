@@ -14,18 +14,19 @@ trog_velocity_controller:
   cmd_vel_timeout: 0.25
   velocity_rolling_window_size: 2
 
+  wheel_separation: 0.85
+  wheel_radius: 0.1065
+
   # Base frame_id
   base_frame_id: base_link
 
-  # Odometry fused with IMU is published by robot_localization, so
-  # no need to publish a TF based on encoders alone.
-  enable_odom_tf: false
+  enable_odom_tf: true
 
   # roboteq provides wheel velocities
   estimate_velocity_from_position: false
 
   # Wheel separation and radius multipliers
-  wheel_separation_multiplier: 1.875 # default: 1.0
+  wheel_separation_multiplier: 1.0 # default: 1.0
   wheel_radius_multiplier    : 1.0 # default: 1.0
 
   # Velocity and acceleration limits

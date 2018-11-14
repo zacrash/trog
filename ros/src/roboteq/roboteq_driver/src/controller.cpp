@@ -1,33 +1,12 @@
-/**
-Software License Agreement (BSD)
 
-\file      controller.cpp
-\authors   Mike Purvis <mpurvis@clearpathrobotics.com>
-           Mike Irvine <mirvine@clearpathrobotics.com>
-\copyright Copyright (c) 2013, Clearpath Robotics, Inc., All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
-following conditions are met:
- * Redistributions of source code must retain the above copyright notice, this list of conditions and the following
-   disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
-   disclaimer in the documentation and/or other materials provided with the distribution.
- * Neither the name of Clearpath Robotics nor the names of its contributors may be used to endorse or promote products
-   derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
-INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
 #include "roboteq_driver/controller.h"
 #include "roboteq_driver/channel.h"
 
 #include "roboteq_msgs/Status.h"
 #include "serial/serial.h"
+
+// For ROS Service, allows for "on demand" feedback
+#include "roboteq_driver/Feedback.h"
 
 #include <boost/bind.hpp>
 #include <boost/algorithm/string/replace.hpp>
@@ -93,7 +72,8 @@ void Controller::connect() {
 void Controller::read() {
   ROS_DEBUG_STREAM_NAMED("serial", "Bytes waiting: " << serial_->available());
   std::string msg = serial_->readline(max_line_length, eol);
-  if (!msg.empty()) {
+
+    if (!msg.empty()) {
     ROS_DEBUG_STREAM_NAMED("serial", "RX: " << msg);
     if (msg[0] == '+' || msg[0] == '-') {
       // Notify the ROS thread that a message response (ack/nack) has arrived.
@@ -110,11 +90,12 @@ void Controller::read() {
         processFeedback(msg);
       }
     } else {
-      // Unknown other message.
-//      ROS_WARN_STREAM("Unknown serial message received: " << msg);
+      //Unknown other message.
+     ROS_WARN_STREAM("Unknown serial message received: " << msg);
     }
   } else {
-    ROS_WARN_NAMED("serial", "Serial::readline() returned no data.");
+  
+      ROS_WARN_NAMED("serial", "Serial::readline() returned no data.");
     if (!receiving_script_messages_) {
       if (start_script_attempts_ < 5) {
         start_script_attempts_++;
@@ -128,10 +109,11 @@ void Controller::read() {
         }
         ros::Duration(1.0).sleep();
       }
-    } else {
+          }
+    else {
       ROS_DEBUG("Script is believed to be in-place and running, so taking no action.");
     }
-  }
+    }
 }
 
 void Controller::write(std::string msg) {
@@ -186,6 +168,7 @@ void Controller::processStatus(std::string str) {
 
 void Controller::processFeedback(std::string msg) {
   std::vector<std::string> fields;
+
   boost::split(fields, msg, boost::algorithm::is_any_of(":"));
   if (fields.size() != 11) {
     ROS_WARN("Wrong number of feedback fields. Dropping message.");
@@ -201,7 +184,7 @@ void Controller::processFeedback(std::string msg) {
   if (channel_num >= 1 && channel_num <= channels_.size()) {
     channels_[channel_num - 1]->feedbackCallback(fields);
   } else {
-    ROS_WARN("Bad channel number. Dropping message.");
+    ROS_WARN("Bad channel number %d. Dropping message.", channel_num);
     return;
   }
 }
@@ -244,6 +227,22 @@ bool Controller::downloadScript() {
     line_num++;
   }
   return true;
+}
+
+
+bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_driver::Feedback::Response &res)
+{ 
+  int channel_num = req.channel;
+
+     if (channel_num >= 1 && channel_num <= channels_.size()) {
+       res.measuredPosition = channels_[req.channel-1]->getMeasuredPosition();
+     }
+     else {
+       ROS_WARN("Bad channel number. Dropping message.");
+       return false;
+     }
+
+    return true;
 }
 
 }  // namespace roboteq

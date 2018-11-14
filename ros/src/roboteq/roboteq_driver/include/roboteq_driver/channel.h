@@ -12,7 +12,7 @@ following conditions are met:
  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
    disclaimer in the documentation and/or other materials provided with the distribution.
  * Neither the name of Clearpath Robotics nor the names of its contributors may be used to endorse or promote products
-   derived from this software without specific prior written permission.
+   derived from  this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
 INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -42,8 +42,10 @@ class Channel
     Channel(int channel_num, std::string ns, Controller* controller);
     void feedbackCallback(std::vector<std::string>);
 
+    // Used to conform to ROS Control interface
+    double getMeasuredPosition() { return _measured_position;}
+
   protected:
-    int debug_helper(double setpoint);
     /**
      * @param x Angular velocity in radians/s.
      * @return Angular velocity in RPM.
@@ -62,30 +64,11 @@ class Channel
       return x * (2 * M_PI) / 60;
     }
 
-    /**
-     * Conversion of radians to encoder ticks. Note that this assumes a
-     * 1024-line quadrature encoder (hence 4096).
-     *
-     * @param x Angular position in radians.
-     * @return Angular position in encoder ticks.
-     */
-    static double to_encoder_ticks(double x)
-    {
-      return x * 4096 / (2 * M_PI);
-    }
-
-    /**
-     * Conversion of encoder ticks to radians. Note that this assumes a
-     * 1024-line quadrature encoder (hence 4096).
-     *
-     * @param x Angular position in encoder ticks.
-     * @return Angular position in radians.
-     */
     static double from_encoder_ticks(double x)
     {
-      return x * (2 * M_PI) / 4096;
+      return x * (2 * M_PI) / 8800;
     }
-
+    
     void cmdCallback(const roboteq_msgs::Command&);
     void timeoutCallback(const ros::TimerEvent&);
 
@@ -99,9 +82,9 @@ class Channel
     ros::Timer timeout_timer_;
 
     ros::Time last_feedback_time_;
-    uint8_t last_mode_;
 
     //Control
+    double _measured_position;
 };
 
 }

@@ -2,8 +2,6 @@
 Software License Agreement (BSD)
 
 \file      controller.h
-\authors   Mike Purvis <mpurvis@clearpathrobotics.com>
-\copyright Copyright (c) 2013, Clearpath Robotics, Inc., All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
 following conditions are met:
@@ -31,6 +29,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <boost/lexical_cast.hpp>
 #include <stdint.h>
 #include <string>
+
+#include "roboteq_driver/Feedback.h"
+
+
 
 namespace serial {
   class Serial;
@@ -113,6 +115,9 @@ class Controller
     Controller (const char *port, int baud);
     ~Controller();
 
+
+    bool getFeedback(roboteq_driver::Feedback::Request  &req, roboteq_driver::Feedback::Response &res);
+ 
     void addChannel(Channel* channel);
     void connect();
     bool connected() { return connected_; }
@@ -129,8 +134,10 @@ class Controller
     void setUserVariable(int var, int val) { command << "VAR" << var << val << send; }
     void setUserBool(int var, bool val) { command << "B" << var << (val ? 1 : 0) << send; }
     bool downloadScript();
+    void setSerialEcho(bool serial_echo) { param << "ECHOF" << (serial_echo ? 0 : 1) << sendVerify;
+   
 
-    void setSerialEcho(bool serial_echo) { param << "ECHOF" << (serial_echo ? 0 : 1) << sendVerify; }
+    }
 };
 
 }
