@@ -3,6 +3,8 @@ Trog is a pilot mobile battery energy storage system that works in integration w
 
 ToDo List
 ========
+#### Miscellaneous
+* Document various tasks
 
 #### Software
 * [ ] Figure out why control node has slowed
