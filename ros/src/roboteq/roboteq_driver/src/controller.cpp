@@ -230,19 +230,19 @@ bool Controller::downloadScript() {
 }
 
 
-bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_driver::Feedback::Response &res)
-{ 
-  int channel_num = req.channel;
+// bool Controller::getFeedback(roboteq_driver::Feedback::Request &req, roboteq_driver::Feedback::Response &res)
+// { 
+//   int channel_num = req.channel;
 
-     if (channel_num >= 1 && channel_num <= channels_.size()) {
-       res.measuredPosition = channels_[req.channel-1]->getMeasuredPosition();
-     }
-     else {
-       ROS_WARN("Bad channel number. Dropping message.");
-       return false;
-     }
+//      if (channel_num >= 1 && channel_num <= channels_.size()) {
+//        res.measuredPosition = channels_[req.channel-1]->getMeasuredPosition();
+//      }
+//      else {
+//        ROS_WARN("Bad channel number. Dropping message.");
+//        return false;
+//      }
 
-    return true;
-}
+//     return true;
+// }
 
 }  // namespace roboteq
