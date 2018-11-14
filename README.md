@@ -5,14 +5,12 @@ ToDo List
 ========
 
 #### Software
-* [ ] Converting setpoints to velocities. Measure and calibrate.
-* [ ] Move to GMapping
+* [ ] Figure out why control node has slowed
 * [ ] Configure move_base parameters
-* [ ] Make URDF correct
 * [ ] Get GPS readings
 
-
 #### Hardware
+* [ ] Get monitor 
 * [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
 
 ## Milestones
