@@ -27,6 +27,8 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_subdirectory(mbs)
 add_subdirectory(src)
 
+add_executable(odom_forwarder src/odom_forwarder.cpp)
+
 # Mark other files for installation (e.g. launch and bag files, etc.)
 install(DIRECTORY launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}

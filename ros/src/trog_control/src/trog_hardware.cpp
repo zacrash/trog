@@ -75,7 +75,7 @@ namespace trog_control
    */
   void TrogHardware::updateJointsFromHardware()
   {
-    ros::ServiceClient client = nh_.serviceClient<roboteq_driver::Feedback>("get_feedback");
+    ros::ServiceClient client = nh_.serviceClient<roboteq_driver::Feedback>("read_encoder_state");
     roboteq_driver::Feedback srv;
 
     for (int channel_num = 1; channel_num <= 2; channel_num++) {
@@ -86,7 +86,7 @@ namespace trog_control
         joints_[channel_num-1].position = channel_num == 1 ? mp : -mp;
       }
       else
-        ROS_ERROR("Failed to call service get_feedback with channel number: %d", channel_num);
+        ROS_ERROR("Failed to call service read_encoder_state with channel number: %d", channel_num);
     }
   }
 
