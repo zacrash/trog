@@ -13,6 +13,7 @@ ToDo List
 
 #### Software
 * [ ] Speed up control node response time
+  * There is literall a command "?C 1"
 * [ ] Get GPS readings
 * [ ] Add unit tests
 
