@@ -14,22 +14,19 @@ ToDo List
 #### Software
 * [ ] Speed up control node response time
   * There is literall a command "?C 1"
+* [ ] Calibrate velocity and motor controller commands
 * [ ] Get GPS readings
 * [ ] Add unit tests
 
 #### Hardware
+* [ ] Establish local wifi network to avoid continually dropping connection
 * [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
 
 
 User Guide
 ===
 ## Get robot up and running
-    $ roslaunch trog_bringup bringup.launch create_map:=<boolean>
+    $ roslaunch trog_bringup bringup.launch create_map:=<boolean> move_base:=<boolean>
     
 ## Teleop
     $ rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/trog_velocity_controller/cmd_vel
-
-## Autonomous navigation within a known map
-    $ roslaunch trog_2dnav move_base.launch
-
-
